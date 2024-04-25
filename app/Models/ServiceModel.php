@@ -12,6 +12,7 @@ class ServiceModel extends Model
     protected $useAutoIncrement = true;
     protected $allowedFields = ['user_id', 'category_id', 'judul', 'deskripsi', 'foto'];
 
+    // seller -> manage service
     // get service berdasarkan ID
     public function getServices($userId)
     {
@@ -30,6 +31,7 @@ class ServiceModel extends Model
             ->where('user_id', $userId)
             ->get()->getFirstRow();
     }
+    // seller -> manage service
 
     public function getAllService()
     {
@@ -45,6 +47,14 @@ class ServiceModel extends Model
             ->join('tbl_categories', 'tbl_categories.id_categories = tbl_services.category_id')
             ->join('users', 'tbl_services.user_id = users.id')
             ->where('category_id', $idCategory)
+            ->get()->getResultArray();
+    }
+
+    public function getServiceById($serviceId)
+    {
+        return $this->db->table('tbl_services')
+            ->join('users', 'tbl_services.user_id = users.id')
+            ->where('service_id', $serviceId)
             ->get()->getResultArray();
     }
 

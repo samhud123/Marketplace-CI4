@@ -58,8 +58,47 @@
                                     </a>
                                 </div>
                                 <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                                    <a href="#!" class="btn btn-sm btn-primary shadow-0 me-1" style="background-color: #00619a"><i class="fas fa-shopping-cart"></i> Order</a>
-                                    <a href="" class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> Detail</a>
+                                    <a href="/order?service=<?= $service['service_id']; ?>" class="btn btn-sm btn-primary shadow-0 me-1" style="background-color: #00619a"><i class="fas fa-shopping-cart"></i> Order</a>
+                                    <!-- <a href="/services/detail/<?= $service['service_id']; ?>" class="btn btn-sm btn-outline-primary"><i class="fas fa-eye"></i> Detail</a> -->
+                                    <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#service<?= $service['service_id']; ?>">
+                                        <i class="fas fa-eye"></i> Detail
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade modal-lg" id="service<?= $service['service_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Detail</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="mb-3 text-center">
+                                        <img src="/img/services/<?= $service['foto']; ?>" alt="" class="w-50">
+                                    </div>
+                                    <div class="mb-2 text-center">
+                                        <h3><?= $service['judul']; ?></h3>
+                                    </div>
+                                    <div class="mb-2 text-center">
+                                        <span class="badge text-bg-primary"><?= $service['category_name']; ?></span>
+                                    </div>
+                                    <div class="px-5 text-center">
+                                        <p><?= $service['deskripsi']; ?></p>
+                                    </div>
+                                    <div class="my-3 text-center">
+                                        <a href="s/<?= $service['username']; ?>" class="text-decoration-none">
+                                            <img src="/assets/images/profile/user-1.jpg" alt="" width="40" height="40" class="rounded-circle me-2">
+                                            <p class="d-inline fs-6">@<?= $service['username']; ?></p>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <a href="/order?service=<?= $service['service_id']; ?>" class="btn btn-primary shadow-0 me-1" style="background-color: #00619a"><i class="fas fa-shopping-cart"></i> Order</a>
                                 </div>
                             </div>
                         </div>
@@ -70,29 +109,6 @@
 
         <hr>
 
-        <!-- Pagination -->
-        <!-- <nav aria-label="Page navigation example" class="d-flex justify-content-center mt-3">
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">«</span>
-                    </a>
-                </li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">»</span>
-                    </a>
-                </li>
-            </ul>
-        </nav> -->
-        <!-- Pagination -->
     </div>
 </div>
 <?= $this->endSection() ?>

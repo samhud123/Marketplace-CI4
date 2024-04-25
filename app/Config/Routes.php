@@ -9,6 +9,9 @@ $routes->get('/', 'Home::index');
 $routes->get('/categories', 'Home::category');
 $routes->get('/category/(:segment)', 'Home::show/$1');
 $routes->get('/services', 'Home::search');
+$routes->get('/services/detail/(:num)', 'Home::detail/$1');
+$routes->get('/order', 'Home::order', ['filter' => 'role:Buyer']);
+$routes->post('/order', 'Home::attemptOrder', ['filter' => 'role:Buyer']);
 
 // routes sellers
 $routes->get('/seller', 'Seller::index', ['filter' => 'role:Seller']);
@@ -22,9 +25,13 @@ $routes->get('/seller/services/edit/(:num)', 'SellerService::edit/$1', ['filter'
 $routes->post('/seller/services/update/(:num)', 'SellerService::update/$1', ['filter' => 'role:Seller']);
 $routes->delete('/seller/delService/(:num)', 'SellerService::delete/$1', ['filter' => 'role:Seller']);
 
+// routes sellers orders
+$routes->get('/seller/orders', 'SellerOrders::index', ['filter' => 'role:Seller']);
+
 // routes buyers
 $routes->get('/buyer', 'Buyer::index', ['filter' => 'role:Buyer']);
 $routes->post('/buyer/profile', 'Buyer::saveProfile', ['filter' => 'role:Buyer']);
+$routes->get('/buyer/order', 'Buyer::order', ['filter' => 'role:Buyer']);
 
 // routes admin
 $routes->get('/admin', 'Admin::index', ['filter' => 'role:Admin']);

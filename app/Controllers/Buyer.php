@@ -2,20 +2,25 @@
 
 namespace App\Controllers;
 
+use App\Models\OrdersModel;
 use Myth\Auth\Models\UserModel;
 
 class Buyer extends BaseController
 {
-    protected $userModel;
+    protected $userModel, $ordersModel;
 
     public function __construct()
     {
         $this->userModel = new UserModel();
+        $this->ordersModel = new OrdersModel();
     }
 
     public function index()
     {
-        return view('buyers/index');
+        $data = [
+            'title' => 'Buyer | Profile'
+        ];
+        return view('buyers/index', $data);
     }
 
     public function saveProfile()
@@ -54,5 +59,14 @@ class Buyer extends BaseController
             session()->setFlashdata('message', 'Successfully update profile');
             return redirect()->to('/buyer');
         }
+    }
+
+    public function order()
+    {
+        $data = [
+            'title' => 'Buyer | Order',
+            'orders' => $this->ordersModel->getNewOrders(user_id())
+        ];
+        return view('buyers/order', $data);
     }
 }

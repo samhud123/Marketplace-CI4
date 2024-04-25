@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>FREEWORK</title>
+    <title><?= $title; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -69,6 +69,21 @@
             </div>
         </nav>
         <!-- Navbar -->
+
+        <div class="bg-primary mb-4">
+            <div class="container py-4">
+                <h3 class="text-white mt-2">My Account</h3>
+                <!-- Breadcrumb -->
+                <nav class="d-flex mb-2">
+                    <h6 class="mb-0">
+                        <a href="<?= base_url(); ?>" class="text-white-50">Home</a>
+                        <span class="text-white-50 mx-2"> &gt; </span>
+                        <a href="/buyer" class="text-white"><u>Profile</u></a>
+                    </h6>
+                </nav>
+                <!-- Breadcrumb -->
+            </div>
+        </div>
 
         <!-- Jumbotron -->
         <?= $this->renderSection('content') ?>

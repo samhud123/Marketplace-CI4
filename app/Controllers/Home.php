@@ -3,16 +3,18 @@
 namespace App\Controllers;
 
 use App\Models\CategoriesModel;
+use App\Models\OrdersModel;
 use App\Models\ServiceModel;
 
 class Home extends BaseController
 {
-    protected $categories, $serviceModel;
+    protected $categories, $serviceModel, $ordersModel;
 
     public function __construct()
     {
         $this->categories =  new CategoriesModel();
         $this->serviceModel = new ServiceModel();
+        $this->ordersModel = new OrdersModel();
     }
 
     public function index(): string
@@ -60,5 +62,33 @@ class Home extends BaseController
             'services'      => $result
         ];
         return view('services', $data);
+    }
+
+    public function detail($id)
+    {
+        
+    }
+
+    public function order()
+    {
+        $serviceId = $this->request->getGet('service');
+        $data = [
+            'categories'    => $this->categories->findAll(),
+            'service'       => $this->serviceModel->getServiceById($serviceId)
+        ];
+        return view('order', $data);
+    }
+
+    public function attemptOrder()
+    {
+        $this->ordersModel->insert([
+            'buyer_id' => user_id(),
+            'service_id' => $this->request->getPost('serviceId'),
+            'pesan'     => $this->request->getPost('message'),
+        ]);
+
+        //flash message
+        session()->setFlashdata('message', 'Order successful, waiting for seller confirmation...');
+        return redirect()->to('/buyer/order');
     }
 }
