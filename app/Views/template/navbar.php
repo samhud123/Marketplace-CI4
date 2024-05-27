@@ -75,8 +75,7 @@
                 <a class="nav-link active" aria-current="page" href="/">Home</a>
                 <a class="nav-link" href="#">About Us</a>
                 <a class="nav-link" href="/categories">Categories</a>
-                <a class="nav-link" href="/services">Services</a>
-                <a class="nav-link" href="#">Products</a>
+                <a class="nav-link" href="/services">All Services</a>
             </div>
         </div>
     </div>

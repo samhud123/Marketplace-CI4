@@ -82,6 +82,7 @@
             <h5 class="card-title mb-3">Message to Seller</h5>
             <form action="/order" method="post">
               <?= csrf_field(); ?>
+              <input type="hidden" name="sellerId" id="sellerId" value="<?= $service[0]['user_id']; ?>">
               <input type="hidden" name="serviceId" value="<?= $service[0]['service_id']; ?>">
               <div class="mb-3">
                 <p class="mb-0">Input message order</p>

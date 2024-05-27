@@ -27,7 +27,10 @@ class Home extends BaseController
 
     public function category()
     {
-        return "All Category";
+        $data = [
+            'categories' => $this->categories->findAll()
+        ];
+        return view('categories', $data);
     }
 
     public function show($category)
@@ -64,11 +67,6 @@ class Home extends BaseController
         return view('services', $data);
     }
 
-    public function detail($id)
-    {
-        
-    }
-
     public function order()
     {
         $serviceId = $this->request->getGet('service');
@@ -83,6 +81,7 @@ class Home extends BaseController
     {
         $this->ordersModel->insert([
             'buyer_id' => user_id(),
+            'seller_id' => $this->request->getPost('sellerId'),
             'service_id' => $this->request->getPost('serviceId'),
             'pesan'     => $this->request->getPost('message'),
         ]);

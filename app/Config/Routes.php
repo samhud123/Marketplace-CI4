@@ -27,11 +27,27 @@ $routes->delete('/seller/delService/(:num)', 'SellerService::delete/$1', ['filte
 
 // routes sellers orders
 $routes->get('/seller/orders', 'SellerOrders::index', ['filter' => 'role:Seller']);
+$routes->get('/seller/orders/detail/(:num)', 'SellerOrders::detail/$1', ['filter' => 'role:Seller']);
+$routes->post('/seller/orders/price', 'SellerOrders::price', ['filter' => 'role:Seller']);
+$routes->get('/seller/orders/reject/(:num)', 'SellerOrders::reject/$1', ['filter' => 'role:Seller']);
+
+// routes sellers history
+$routes->get('/seller/history', 'SellerHistory::index', ['filter' => 'role:Seller']);
+$routes->get('/seller/history/detail/(:num)', 'SellerHistory::detail/$1', ['filter' => 'role:Seller']);
+$routes->get('/seller/history/search', 'SellerHistory::search', ['filter' => 'role:Seller']);
 
 // routes buyers
 $routes->get('/buyer', 'Buyer::index', ['filter' => 'role:Buyer']);
 $routes->post('/buyer/profile', 'Buyer::saveProfile', ['filter' => 'role:Buyer']);
 $routes->get('/buyer/order', 'Buyer::order', ['filter' => 'role:Buyer']);
+$routes->get('/buyer/order/datail/(:num)', 'Buyer::detail/$1', ['filter' => 'role:Buyer']);
+$routes->post('/buyer/order/payment/(:num)', 'Buyer::payment/$1', ['filter' => 'role:Buyer']);
+$routes->post('/buyer/order/confirm/(:num)', 'Buyer::confirm/$1', ['filter' => 'role:Buyer']);
+$routes->get('/buyer/order/cancel/(:num)', 'Buyer::cancel/$1', ['filter' => 'role:Buyer']);
+$routes->get('/buyer/order/finish/(:num)', 'Buyer::finish/$1', ['filter' => 'role:Buyer']);
+
+$routes->get('/buyer/history', 'BuyerHistory::index', ['filter' => 'role:Buyer']);
+$routes->get('/buyer/history/detail/(:num)', 'BuyerHistory::detail/$1', ['filter' => 'role:Buyer']);
 
 // routes admin
 $routes->get('/admin', 'Admin::index', ['filter' => 'role:Admin']);
@@ -48,3 +64,6 @@ $routes->get('/admin/sellers/detail/(:segment)', 'ManageSellers::detail/$1', ['f
 
 // routes admin manage buyers
 $routes->get('/admin/buyers', 'ManageBuyers::index', ['filter' => 'role:Admin']);
+
+// routes admin reports
+$routes->get('/admin/reports', 'AdminReports::index', ['filter' => 'role:Admin']);

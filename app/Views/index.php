@@ -11,9 +11,11 @@
                     Services & Products
                 </h1>
                 <p>Trendy Products, Factory Prices, Excellent Service</p>
-                <a href="/login" class="btn btn-light fw-bold" style="color: #00619a;">
-                    Join Now <i class="fas fa-arrow-alt-circle-right"></i>
-                </a>
+                <?php if (logged_in() == false) : ?>
+                    <a href="/login" class="btn btn-light fw-bold" style="color: #00619a;">
+                        Join Now <i class="fas fa-arrow-alt-circle-right"></i>
+                    </a>
+                <?php endif; ?>
                 <!-- <button type="button" class="btn btn-light shadow-0 text-primary pt-2 border border-white">
                             <span class="pt-1">Purchase now</span>
                         </button> -->

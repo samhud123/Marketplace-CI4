@@ -3,22 +3,25 @@
 namespace App\Controllers;
 
 use App\Models\OrdersModel;
+use App\Models\CategoriesModel;
 use Myth\Auth\Models\UserModel;
 
 class Buyer extends BaseController
 {
-    protected $userModel, $ordersModel;
+    protected $userModel, $ordersModel, $categories;
 
     public function __construct()
     {
         $this->userModel = new UserModel();
         $this->ordersModel = new OrdersModel();
+        $this->categories =  new CategoriesModel();
     }
 
     public function index()
     {
         $data = [
-            'title' => 'Buyer | Profile'
+            'title' => 'Buyer | Profile',
+            'categories'    => $this->categories->findAll(),
         ];
         return view('buyers/index', $data);
     }
@@ -65,8 +68,82 @@ class Buyer extends BaseController
     {
         $data = [
             'title' => 'Buyer | Order',
-            'orders' => $this->ordersModel->getNewOrders(user_id())
+            'orders' => $this->ordersModel->getNewOrders(user_id()),
+            'categories'    => $this->categories->findAll(),
         ];
-        return view('buyers/order', $data);
+        return view('buyers/order/index', $data);
+    }
+
+    public function detail($orderId)
+    {
+        $data = [
+            'title' => 'Buyer | Order',
+            'order' => $this->ordersModel->getDetailOrderBuyer($orderId, user_id()),
+            'categories' => $this->categories->findAll(),
+        ];
+        return view('buyers/order/detail', $data);
+    }
+
+    public function confirm($orderId)
+    {
+        $id_transaksi = rand();
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = 'SB-Mid-server-c_uIzFpCcATE9-3OEyNZTPH6';
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $id_transaksi,
+                'gross_amount' => $this->request->getVar('harga'),
+            ),
+            'customer_details' => array(
+                'first_name' => user()->nama,
+                'email' => user()->email,
+                'phone' => user()->no_tlp,
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        $token = $snapToken;
+
+        $this->ordersModel->update($orderId, [
+            'id_transaksi' => $id_transaksi,
+            'token' => $token,
+            'status_order' => 'approved'
+        ]);
+        return redirect()->to('/buyer/order');
+    }
+
+    public function payment($orderId)
+    {
+        $result = json_decode($this->request->getPost('result_data'), true);
+
+        $this->ordersModel->update($orderId, [
+            'status_code' => $result['status_code'],
+            'status_pembayaran' => $result['transaction_status'],
+        ]);
+
+        return redirect()->to('/buyer/order');
+    }
+
+    public function cancel($orderId)
+    {
+        $this->ordersModel->update($orderId, [
+            'status_order' => 'cancelled'
+        ]);
+        return redirect()->to('/buyer/order');
+    }
+
+    public function finish($orderId)
+    {
+        $this->ordersModel->update($orderId, [
+            'status_order' => 'success'
+        ]);
+        return redirect()->to('/buyer/order');
     }
 }

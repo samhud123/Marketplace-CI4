@@ -40,7 +40,7 @@
         </a>
     </li>
     <li class="sidebar-item">
-        <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
+        <a class="sidebar-link <?php if ($title == "Seller | Reports") echo "active"; ?>" href="/seller/history" aria-expanded="false">
             <span>
                 <i class="ti ti-file-description"></i>
             </span>
@@ -59,14 +59,14 @@
             <span class="hide-menu">My Profile</span>
         </a>
     </li>
-    <li class="sidebar-item">
+    <!-- <li class="sidebar-item">
         <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
             <span>
                 <i class="ti ti-user fs-6"></i>
             </span>
             <span class="hide-menu">Reset Password</span>
         </a>
-    </li>
+    </li> -->
     <li class="sidebar-item">
         <a class="sidebar-link" href="<?= base_url(); ?>logout" aria-expanded="false">
             <span>

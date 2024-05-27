@@ -21,7 +21,7 @@
     </div>
 <?php endif; ?>
 
-<div class="container">
+<div class="container-fluid">
     <div class="main-body">
         <div class="row">
             <?= $this->include('buyers/template/sidebar'); ?>

@@ -20,6 +20,11 @@ class CreateOrdersTable extends Migration
                 'constraint' => 11,
                 'unsigned'   => true,
             ],
+            'seller_id' => [
+                'type'       => 'INT',
+                'constraint' => 11,
+                'unsigned'   => true,
+            ],
             'service_id' => [
                 'type'       => 'INT',
                 'constraint' => 11,
@@ -62,6 +67,7 @@ class CreateOrdersTable extends Migration
         ]);
         $this->forge->addKey('order_id', true);
         $this->forge->addForeignKey('buyer_id', 'users', 'id', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('seller_id', 'users', 'id', 'CASCADE', 'CASCADE');
         $this->forge->addForeignKey('service_id', 'tbl_services', 'service_id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('tbl_orders');
     }

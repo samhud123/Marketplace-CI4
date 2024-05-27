@@ -16,8 +16,8 @@
                     <li class="list-group-item d-flex align-items-center flex-wrap border-0 <?= $title == 'Buyer | Order' ? 'active' : ''; ?>"><i class="fas fa-shopping-cart me-3"></i><span>Orders</span></li>
                 </a>
                 <hr>
-                <a href="" class="text-decoration-none border-0 rounded-2">
-                    <li class="list-group-item d-flex align-items-center flex-wrap border-0"><i class="fas fa-history me-3"></i><span>History</span></li>
+                <a href="/buyer/history" class="text-decoration-none border-0 rounded-2">
+                    <li class="list-group-item d-flex align-items-center flex-wrap border-0 <?= $title == 'Buyer | History' ? 'active' : ''; ?>"><i class="fas fa-history me-3"></i><span>History</span></li>
                 </a>
                 <hr>
                 <a href="" class="text-decoration-none border-0 rounded-2">
