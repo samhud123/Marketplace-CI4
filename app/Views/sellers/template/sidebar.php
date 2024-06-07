@@ -26,7 +26,7 @@
     <li class="sidebar-item">
         <a class="sidebar-link <?php if ($title == "Seller | Orders") echo "active"; ?>" href="/seller/orders" aria-expanded="false">
             <span>
-                <i class="ti ti-alert-circle"></i>
+                <i class="ti ti-shopping-cart"></i>
             </span>
             <span class="hide-menu">Manage Orders</span>
         </a>
@@ -34,7 +34,7 @@
     <li class="sidebar-item">
         <a class="sidebar-link" href="./ui-card.html" aria-expanded="false">
             <span>
-                <i class="ti ti-file-description"></i>
+                <i class="ti ti-wallet"></i>
             </span>
             <span class="hide-menu">Withdrawal</span>
         </a>
@@ -42,7 +42,7 @@
     <li class="sidebar-item">
         <a class="sidebar-link <?php if ($title == "Seller | Reports") echo "active"; ?>" href="/seller/history" aria-expanded="false">
             <span>
-                <i class="ti ti-file-description"></i>
+                <i class="ti ti-report"></i>
             </span>
             <span class="hide-menu">Reports</span>
         </a>

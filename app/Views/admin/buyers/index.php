@@ -52,7 +52,11 @@
                                 </td>
                                 <td class="border-bottom-0">
                                     <a href="/admin/buyers/detail/<?= $buyer['username']; ?>" class="btn btn-primary"><i class="ti ti-eye"></i> Detail</a>
-                                    <button class="btn btn-danger"><i class="ti ti-square-x"></i> Disabled</button>
+                                    <?php if ($buyer['active'] == 1) : ?>
+                                        <a href="/admin/buyers/disabled/<?= $buyer['id']; ?>" class="btn btn-danger"><i class="ti ti-square-x"></i> Disabled</a>
+                                    <?php elseif ($buyer['active'] == 0) : ?>
+                                        <a href="/admin/buyers/enabled/<?= $buyer['id']; ?>" class="btn btn-success"><i class="ti ti-check"></i> Enabled</a>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endif; ?>

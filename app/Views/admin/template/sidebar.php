@@ -52,7 +52,7 @@
         <span class="hide-menu">ACCOUNT</span>
     </li>
     <li class="sidebar-item">
-        <a class="sidebar-link <?php if ($title == "Admin | Profile") echo "active"; ?>" href="<?= base_url(); ?>seller/profile" aria-expanded="false">
+        <a class="sidebar-link <?php if ($title == "Admin | Profile") echo "active"; ?>" href="<?= base_url(); ?>admin/profile" aria-expanded="false">
             <span>
                 <i class="ti ti-user fs-6"></i>
             </span>

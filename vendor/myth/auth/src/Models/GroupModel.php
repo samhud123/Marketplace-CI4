@@ -114,7 +114,7 @@ class GroupModel extends Model
      */
     public function getUsersForGroup(int $groupId)
     {
-        if (null === $found = cache("{$groupId}_users")) {
+        // if (null === $found = cache("{$groupId}_users")) {
             $found = $this->builder()
                 ->select('auth_groups_users.*, users.*')
                 ->join('auth_groups_users', 'auth_groups_users.group_id = auth_groups.id', 'left')
@@ -122,8 +122,8 @@ class GroupModel extends Model
                 ->where('auth_groups.id', $groupId)
                 ->get()->getResultArray();
 
-            cache()->save("{$groupId}_users", $found, 300);
-        }
+            // cache()->save("{$groupId}_users", $found, 300);
+        // }
 
         return $found;
     }

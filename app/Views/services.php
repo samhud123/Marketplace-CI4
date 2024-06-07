@@ -1,6 +1,7 @@
 <?= $this->extend('template/index') ?>
 
 <?= $this->section('content') ?>
+
 <div class="mb-4" style="background-color: #00619a">
     <div class="container py-4">
         <?php if ($keyword === null) : ?>

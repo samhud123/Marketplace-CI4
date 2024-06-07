@@ -76,7 +76,11 @@
                                                         </form>
                                                     <?php endif; ?>
                                                 <?php elseif ($order['status_order'] == 'approved') : ?>
-                                                    <button id="pay-button_<?= $order['order_id']; ?>" class="btn btn-sm btn-primary"><i class="fas fa-wallet"></i> Bayar</button>
+                                                    <?php if ($order['status_pembayaran'] == 'settlement') : ?>
+                                                        <a href="/buyer/order/finish/<?= $order['order_id']; ?>" class="btn btn-sm btn-success">Finish</a>
+                                                    <?php else : ?>
+                                                        <button id="pay-button_<?= $order['order_id']; ?>" class="btn btn-sm btn-primary"><i class="fas fa-wallet"></i> Bayar</button>
+                                                    <?php endif; ?>
                                                     <!-- <a href="https://app.sandbox.midtrans.com/snap/v2/vtweb/" class="btn btn-sm btn-primary" target="_blank"><i class="fas fa-wallet"></i> Bayar</a> -->
                                                 <?php endif; ?>
                                             </td>
@@ -90,7 +94,7 @@
                                             snap.pay('<?= $order['token'] ?>', {
                                                 // Optional
                                                 onSuccess: function(result) {
-                                                    send_result_to_server_<?= $order['order_id'] ?>(result);
+                                                    send_result_to_server<?= $order['order_id'] ?>(result);
                                                 },
                                                 // Optional
                                                 onPending: function(result) {

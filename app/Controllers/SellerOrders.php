@@ -33,10 +33,12 @@ class SellerOrders extends BaseController
 
     public function price()
     {
-        $this->ordersModel->update($this->request->getPost('orderId'),
-        [
-            'harga' => $this->request->getPost('price'),
-        ]);
+        $this->ordersModel->update(
+            $this->request->getPost('orderId'),
+            [
+                'harga' => $this->request->getPost('price'),
+            ]
+        );
 
         return redirect()->to('/seller/orders');
     }

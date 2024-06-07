@@ -12,7 +12,7 @@
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Order History</h5>
             <form action="/seller/history/search" method="get">
-            <div class="input-group mb-3 w-50">
+                <div class="input-group mb-3 w-50">
                     <input type="search" class="form-control" name="keyword" placeholder="Search Buyer..." aria-label="Recipient's username" aria-describedby="button-addon2">
                     <button class="btn btn-primary" type="submit" id="button-addon2"><i class="ti ti-search"></i></button>
                 </div>

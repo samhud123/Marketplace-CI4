@@ -16,7 +16,7 @@
 
                     <form action="<?= url_to('register') ?>" method="post" class="user">
                         <?= csrf_field() ?>
-
+                        <input type="hidden" name="foto" value="default.png">
                         <div class="form-group">
                             <input type="text" class="form-control form-control-user <?php if (session('errors.username')) : ?>is-invalid<?php endif ?>" name="username" placeholder="<?= lang('Auth.username') ?>" value="<?= old('username') ?>" autofocus>
                         </div>

@@ -7,6 +7,7 @@
     <title><?= $title; ?></title>
     <link rel="shortcut icon" type="image/png" href="<?= base_url(); ?>/assets/images/logos/favicon.png" />
     <link rel="stylesheet" href="<?= base_url(); ?>/assets/css/styles.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -46,11 +47,13 @@
             </div>
         </div>
     </div>
+
     <script src="<?= base_url(); ?>/assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="<?= base_url(); ?>/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url(); ?>/assets/js/sidebarmenu.js"></script>
     <script src="<?= base_url(); ?>/assets/js/app.min.js"></script>
     <script src="<?= base_url(); ?>/assets/libs/simplebar/dist/simplebar.js"></script>
+
 </body>
 
 </html>

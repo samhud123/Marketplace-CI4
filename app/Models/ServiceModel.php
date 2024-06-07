@@ -36,6 +36,7 @@ class ServiceModel extends Model
     public function getAllService()
     {
         return $this->db->table('tbl_services')
+            ->select('tbl_services.service_id, tbl_services.user_id, tbl_services.judul, tbl_services.foto, tbl_services.deskripsi, users.username')
             ->join('tbl_categories', 'tbl_categories.id_categories = tbl_services.category_id')
             ->join('users', 'tbl_services.user_id = users.id')
             ->get()->getResultArray();
@@ -53,6 +54,7 @@ class ServiceModel extends Model
     public function getServiceById($serviceId)
     {
         return $this->db->table('tbl_services')
+            ->select('tbl_services.user_id, tbl_services.service_id, tbl_services.foto, tbl_services.judul, users.username, tbl_services.deskripsi')
             ->join('users', 'tbl_services.user_id = users.id')
             ->where('service_id', $serviceId)
             ->get()->getResultArray();

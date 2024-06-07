@@ -39,6 +39,7 @@ $routes->get('/seller/history/search', 'SellerHistory::search', ['filter' => 'ro
 // routes buyers
 $routes->get('/buyer', 'Buyer::index', ['filter' => 'role:Buyer']);
 $routes->post('/buyer/profile', 'Buyer::saveProfile', ['filter' => 'role:Buyer']);
+$routes->post('/buyer/updateFoto', 'Buyer::updateFoto', ['filter' => 'role:Buyer']);
 $routes->get('/buyer/order', 'Buyer::order', ['filter' => 'role:Buyer']);
 $routes->get('/buyer/order/datail/(:num)', 'Buyer::detail/$1', ['filter' => 'role:Buyer']);
 $routes->post('/buyer/order/payment/(:num)', 'Buyer::payment/$1', ['filter' => 'role:Buyer']);
@@ -64,6 +65,9 @@ $routes->get('/admin/sellers/detail/(:segment)', 'ManageSellers::detail/$1', ['f
 
 // routes admin manage buyers
 $routes->get('/admin/buyers', 'ManageBuyers::index', ['filter' => 'role:Admin']);
+$routes->get('/admin/buyers/disabled/(:num)', 'ManageBuyers::disabled/$1', ['filter' => 'role:Admin']);
+$routes->get('/admin/buyers/enabled/(:num)', 'ManageBuyers::enabled/$1', ['filter' => 'role:Admin']);
 
 // routes admin reports
 $routes->get('/admin/reports', 'AdminReports::index', ['filter' => 'role:Admin']);
+$routes->get('/admin/reports/search', 'AdminReports::search', ['filter' => 'role:Admin']);
