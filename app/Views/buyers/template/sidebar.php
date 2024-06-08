@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-body">
             <div class="d-flex flex-column align-items-center text-center">
-                <img src="/img/buyer/<?= user()->foto; ?>" alt="Admin" class="rounded-circle p-2 bg-primary" width="110">
+                <img src="/img/buyer/<?= user()->foto; ?>" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
                 <div class="mt-3">
                     <h4><?= user()->username; ?></h4>
                     <button type="button" class="btn btn-sm btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#staticBackdrop">

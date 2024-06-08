@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\OrdersModel;
 use Myth\Auth\Models\GroupModel;
 use Myth\Auth\Models\UserModel;
 
@@ -41,5 +42,18 @@ class ManageBuyers extends BaseController
         return redirect()->to('admin/buyers');
     }
 
+    public function detail($username)
+    {
+        $buyers = new UserModel();
+        $orders = new OrdersModel();
 
+        $getBuyers = $buyers->where('username', $username)->first();
+
+        $data = [
+            'title' => 'Admin | Buyers',
+            'buyer' => $getBuyers,
+            'orders' => $orders->getOrdersByBuyer($getBuyers->id)
+        ];
+        return view('admin/buyers/detail', $data);
+    }
 }

@@ -49,7 +49,11 @@
                                 </td>
                                 <td class="border-bottom-0">
                                     <a href="/admin/sellers/detail/<?= $seller['username']; ?>" class="btn btn-primary"><i class="ti ti-eye"></i> Detail</a>
-                                    <button class="btn btn-danger"><i class="ti ti-square-x"></i> Disabled</button>
+                                    <?php if ($seller['active'] == 1) : ?>
+                                        <a href="/admin/sellers/disabled/<?= $seller['id']; ?>" class="btn btn-danger"><i class="ti ti-square-x"></i> Disabled</a>
+                                    <?php elseif ($seller['active'] == 0) : ?>
+                                        <a href="/admin/sellers/enabled/<?= $seller['id']; ?>" class="btn btn-success"><i class="ti ti-check"></i> Enabled</a>
+                                    <?php endif; ?>
                                 </td>
                             </tr>
                         <?php endif; ?>

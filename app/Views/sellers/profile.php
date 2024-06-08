@@ -1,6 +1,21 @@
 <?= $this->extend('sellers/template/index') ?>
 
 <?= $this->section('content') ?>
+<?php if (session()->get('message')) : ?>
+    <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
+        <?= session()->get('message'); ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->get('errors')) : ?>
+    <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+        <?php foreach (session()->get('errors') as $error) : ?>
+            <li><?= $error ?></li>
+        <?php endforeach; ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
 <div class="container">
     <div class="main-body">
 
@@ -18,18 +33,18 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center">
-                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                            <img src="/img/seller/<?= user()->foto; ?>" alt="Admin" class="rounded-circle" width="150">
                             <div class="mt-3">
                                 <h4><?= user()->username; ?></h4>
-                                <p class="text-secondary mb-1">Full Stack Developer</p>
                                 <p class="text-muted font-size-sm"><?= user()->alamat; ?></p>
-                                <button class="btn btn-primary">Edit Profile</button>
-                                <!-- <button class="btn btn-outline-primary">Message</button> -->
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#updatePhoto">
+                                    Change Photo
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card mt-3">
+                <!-- <div class="card mt-3">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                             <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline">
@@ -66,7 +81,7 @@
                             <span class="text-secondary">bootdey</span>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </div>
             <div class="col-md-8">
                 <div class="card mb-3">
@@ -116,15 +131,13 @@
                             </div>
                         </div>
                         <hr>
-                        <!-- <div class="row">
-                            <div class="col-sm-12">
-                                <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
-                            </div>
-                        </div> -->
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateProfile">
+                            Edit Profile
+                        </button>
                     </div>
                 </div>
-
-                <div class="row gutters-sm">
+                <!-- <div class="row gutters-sm">
                     <div class="col-sm-12 mb-3">
                         <div class="card h-100">
                             <div class="card-body">
@@ -152,8 +165,74 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Update Profile -->
+<div class="modal fade" id="updateProfile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/seller/profile" method="post">
+                <?= csrf_field() ?>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="nama">Full Name</label>
+                        <input type="text" name="nama" id="nama" class="form-control" value="<?= user()->nama ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" class="form-control" value="<?= user()->username ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" value="<?= user()->email ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone">Phone</label>
+                        <input type="tel" name="phone" id="phone" class="form-control" value="<?= user()->no_tlp ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address">Address</label>
+                        <textarea name="address" id="address" class="form-control" rows="2"><?= user()->alamat ?></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Update Photo -->
+<div class="modal fade" id="updatePhoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Change Photo</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/seller/profile/photo" method="post" enctype="multipart/form-data">
+                <?= csrf_field(); ?>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="picture">Change Photo</label>
+                        <input type="file" name="picture" id="picture" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

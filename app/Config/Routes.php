@@ -16,6 +16,8 @@ $routes->post('/order', 'Home::attemptOrder', ['filter' => 'role:Buyer']);
 // routes sellers
 $routes->get('/seller', 'Seller::index', ['filter' => 'role:Seller']);
 $routes->get('/seller/profile', 'Seller::profile', ['filter' => 'role:Seller']);
+$routes->post('/seller/profile', 'Seller::updateProfile', ['filter' => 'role:Seller']);
+$routes->post('/seller/profile/photo', 'Seller::photo', ['filter' => 'role:Seller']);
 
 // routes sellers services
 $routes->get('/seller/services', 'SellerService::index', ['filter' => 'role:Seller']);
@@ -52,6 +54,9 @@ $routes->get('/buyer/history/detail/(:num)', 'BuyerHistory::detail/$1', ['filter
 
 // routes admin
 $routes->get('/admin', 'Admin::index', ['filter' => 'role:Admin']);
+$routes->get('/admin/profile', 'Admin::profile', ['filter' => 'role:Admin']);
+$routes->post('/admin/profile', 'Admin::updateProfile', ['filter' => 'role:Admin']);
+$routes->post('/admin/profile/photo', 'Admin::photo', ['filter' => 'role:Admin']);
 
 // routes admin categories
 $routes->get('/admin/categories', 'Categories::index', ['filter' => 'role:Admin']);
@@ -61,10 +66,13 @@ $routes->delete('/admin/categories/delete/(:num)', 'Categories::delete/$1', ['fi
 
 // routes admin manage sellers
 $routes->get('/admin/sellers', 'ManageSellers::index', ['filter' => 'role:Admin']);
+$routes->get('/admin/sellers/disabled/(:num)', 'ManageSellers::disabled/$1', ['filter' => 'role:Admin']);
+$routes->get('/admin/sellers/enabled/(:num)', 'ManageSellers::enabled/$1', ['filter' => 'role:Admin']);
 $routes->get('/admin/sellers/detail/(:segment)', 'ManageSellers::detail/$1', ['filter' => 'role:Admin']);
 
 // routes admin manage buyers
 $routes->get('/admin/buyers', 'ManageBuyers::index', ['filter' => 'role:Admin']);
+$routes->get('/admin/buyers/detail/(:segment)', 'ManageBuyers::detail/$1', ['filter' => 'role:Admin']);
 $routes->get('/admin/buyers/disabled/(:num)', 'ManageBuyers::disabled/$1', ['filter' => 'role:Admin']);
 $routes->get('/admin/buyers/enabled/(:num)', 'ManageBuyers::enabled/$1', ['filter' => 'role:Admin']);
 

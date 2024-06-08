@@ -59,14 +59,14 @@
             <span class="hide-menu">My Profile</span>
         </a>
     </li>
-    <li class="sidebar-item">
+    <!-- <li class="sidebar-item">
         <a class="sidebar-link" href="/" aria-expanded="false">
             <span>
                 <i class="ti ti-key"></i>
             </span>
             <span class="hide-menu">Reset Password</span>
         </a>
-    </li>
+    </li> -->
     <li class="sidebar-item">
         <a class="sidebar-link" href="/logout" aria-expanded="false">
             <span>

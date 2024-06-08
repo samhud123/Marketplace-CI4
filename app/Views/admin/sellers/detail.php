@@ -17,7 +17,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card mt-3">
+            <!-- <div class="card mt-3">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
                         <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe mr-2 icon-inline">
@@ -54,7 +54,7 @@
                         <span class="text-secondary">bootdey</span>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
         <div class="col-md-8">
             <div class="card mb-3">
@@ -112,7 +112,7 @@
                 </div>
             </div>
 
-            <div class="row gutters-sm">
+            <!-- <div class="row gutters-sm">
                 <div class="col-sm-12 mb-3">
                     <div class="card h-100">
                         <div class="card-body">
@@ -138,6 +138,27 @@
                                 <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+        <div class="col">
+            <h5 class="card-title fw-semibold mb-4">Services</h5>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <?php foreach ($services as $service) : ?>
+                            <div class="col-md-4">
+                                <div class="card" style="width: 18rem;">
+                                    <img src="/img/services/<?= $service['foto']; ?>" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?= $service['judul']; ?></h5>
+                                        <p class="card-text"><?= $service['deskripsi']; ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
