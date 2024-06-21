@@ -64,7 +64,7 @@
                                         </td>
                                     <?php else : ?>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">Rp <?= $order['harga']; ?></p>
+                                            <p class="mb-0 fw-normal">Rp <?= number_format($order['harga'], 2, '.', '.'); ?></p>
                                         </td>
                                     <?php endif; ?>
                                     <td class="border-bottom-0">
@@ -81,6 +81,7 @@
                                     </td>
                                     <td class="border-bottom-0">
                                         <a href="/seller/orders/detail/<?= $order['order_id']; ?>" class="btn btn-success"><i class="ti ti-eye"></i> Detail</a>
+                                        <a href="/seller/orders/invoice/<?= $order['order_id']; ?>" class="btn btn-info"><i class="ti ti-file-invoice fs-5"></i></a>
                                         <?php if ($order['status_order'] === 'process') : ?>
                                             <a href="/seller/orders/reject/<?= $order['order_id']; ?>" class="btn btn-danger"><i class="ti ti-x"></i> Reject</a>
                                         <?php endif; ?>

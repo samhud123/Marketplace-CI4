@@ -35,4 +35,15 @@ class AdminReports extends BaseController
 
         return view('admin/reports/index', $data);
     }
+
+    public function detail($orderId)
+    {
+        $data = [
+            'title' => 'Admin | Reports',
+            'orderDetail' => $this->orderModel->getDetailOrderForAdmin($orderId)
+        ];
+
+        // dd($data['orderDetail']);
+        return view('admin/reports/detail', $data);
+    }
 }

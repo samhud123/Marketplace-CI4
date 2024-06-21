@@ -22,6 +22,16 @@ use CodeIgniter\Config\AutoloadConfig;
  */
 class Autoload extends AutoloadConfig
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        if (file_exists(APPPATH . '../vendor/autoload.php')) {
+            require_once(APPPATH . '../vendor/autoload.php');
+        }
+    }
+
+
     /**
      * -------------------------------------------------------------------
      * Namespaces
@@ -46,6 +56,7 @@ class Autoload extends AutoloadConfig
     public $psr4 = [
         APP_NAMESPACE => APPPATH, // For custom app namespace
         'Config'      => APPPATH . 'Config',
+        'mpdf'        => SYSTEMPATH . 'vendor/autoload.php',
     ];
 
     /**

@@ -3,15 +3,17 @@
 namespace App\Controllers;
 
 use App\Models\OrdersModel;
+use App\Models\WalletModel;
 use Myth\Auth\Models\UserModel;
 
 class Seller extends BaseController
 {
-    protected $ordersModel;
+    protected $ordersModel, $walletModel;
 
     public function __construct()
     {
         $this->ordersModel = new OrdersModel();
+        $this->walletModel = new WalletModel();
     }
 
     public function index(): string
@@ -21,6 +23,7 @@ class Seller extends BaseController
             'orders_complate' => $this->ordersModel->where('seller_id', user_id())->where('status_order', 'success')->countAllResults(),
             'incoming_orders' => $this->ordersModel->where('seller_id', user_id())->where('status_order', 'process')->orWhere('status_order', 'approved')->countAllResults(),
             'orders_failed' => $this->ordersModel->where('seller_id', user_id())->where('status_order', 'rejected')->orWhere('status_order', 'cancelled')->countAllResults(),
+            'saldo' => $this->walletModel->where('seller_id', user_id())->first()
         ];
 
         return view('sellers/index', $data);

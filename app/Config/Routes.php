@@ -5,6 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+
 $routes->get('/', 'Home::index');
 $routes->get('/categories', 'Home::category');
 $routes->get('/category/(:segment)', 'Home::show/$1');
@@ -29,6 +30,7 @@ $routes->delete('/seller/delService/(:num)', 'SellerService::delete/$1', ['filte
 
 // routes sellers orders
 $routes->get('/seller/orders', 'SellerOrders::index', ['filter' => 'role:Seller']);
+$routes->get('/seller/orders/invoice/(:num)', 'SellerOrders::invoice/$1', ['filter' => 'role:Seller']);
 $routes->get('/seller/orders/detail/(:num)', 'SellerOrders::detail/$1', ['filter' => 'role:Seller']);
 $routes->post('/seller/orders/price', 'SellerOrders::price', ['filter' => 'role:Seller']);
 $routes->get('/seller/orders/reject/(:num)', 'SellerOrders::reject/$1', ['filter' => 'role:Seller']);
@@ -37,6 +39,7 @@ $routes->get('/seller/orders/reject/(:num)', 'SellerOrders::reject/$1', ['filter
 $routes->get('/seller/history', 'SellerHistory::index', ['filter' => 'role:Seller']);
 $routes->get('/seller/history/detail/(:num)', 'SellerHistory::detail/$1', ['filter' => 'role:Seller']);
 $routes->get('/seller/history/search', 'SellerHistory::search', ['filter' => 'role:Seller']);
+$routes->get('/seller/history/test', 'SellerHistory::test', ['filter' => 'role:Seller']);
 
 // routes buyers
 $routes->get('/buyer', 'Buyer::index', ['filter' => 'role:Buyer']);
@@ -44,6 +47,7 @@ $routes->post('/buyer/profile', 'Buyer::saveProfile', ['filter' => 'role:Buyer']
 $routes->post('/buyer/updateFoto', 'Buyer::updateFoto', ['filter' => 'role:Buyer']);
 $routes->get('/buyer/order', 'Buyer::order', ['filter' => 'role:Buyer']);
 $routes->get('/buyer/order/datail/(:num)', 'Buyer::detail/$1', ['filter' => 'role:Buyer']);
+$routes->get('/buyer/order/invoice/(:num)', 'Buyer::invoice/$1', ['filter' => 'role:Buyer']);
 $routes->post('/buyer/order/payment/(:num)', 'Buyer::payment/$1', ['filter' => 'role:Buyer']);
 $routes->post('/buyer/order/confirm/(:num)', 'Buyer::confirm/$1', ['filter' => 'role:Buyer']);
 $routes->get('/buyer/order/cancel/(:num)', 'Buyer::cancel/$1', ['filter' => 'role:Buyer']);
@@ -51,6 +55,8 @@ $routes->get('/buyer/order/finish/(:num)', 'Buyer::finish/$1', ['filter' => 'rol
 
 $routes->get('/buyer/history', 'BuyerHistory::index', ['filter' => 'role:Buyer']);
 $routes->get('/buyer/history/detail/(:num)', 'BuyerHistory::detail/$1', ['filter' => 'role:Buyer']);
+$routes->get('/buyer/history/comment/(:num)', 'BuyerHistory::comment/$1', ['filter' => 'role:Buyer']);
+$routes->post('/buyer/history/comment/', 'BuyerHistory::create_comment', ['filter' => 'role:Buyer']);
 
 // routes admin
 $routes->get('/admin', 'Admin::index', ['filter' => 'role:Admin']);
@@ -79,3 +85,4 @@ $routes->get('/admin/buyers/enabled/(:num)', 'ManageBuyers::enabled/$1', ['filte
 // routes admin reports
 $routes->get('/admin/reports', 'AdminReports::index', ['filter' => 'role:Admin']);
 $routes->get('/admin/reports/search', 'AdminReports::search', ['filter' => 'role:Admin']);
+$routes->get('/admin/reports/detail/(:num)', 'AdminReports::detail/$1', ['filter' => 'role:Admin']);

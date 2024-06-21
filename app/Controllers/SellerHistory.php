@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\OrdersModel;
+use \Mpdf\Mpdf;
 
 class SellerHistory extends BaseController
 {
@@ -25,7 +26,7 @@ class SellerHistory extends BaseController
     public function detail($orderId)
     {
         $data = [
-            'title' => 'Seller | Orders',
+            'title' => 'Seller | Reports',
             'order' => $this->ordersModel->getDetailOrderSeller($orderId, user_id())
         ];
         return view('sellers/history/detail', $data);
@@ -41,5 +42,20 @@ class SellerHistory extends BaseController
         ];
 
         return view('sellers/history/search', $data);
+    }
+
+    public function test()
+    {
+        // Inisialisasi mPDF
+        $mpdf = new Mpdf();
+
+        // Contoh HTML yang akan dijadikan PDF
+        $html = view('test-pdf');
+
+        // Menambahkan konten HTML ke mPDF
+        $mpdf->WriteHTML($html);
+
+        // Output dalam bentuk PDF
+        $mpdf->Output('contoh_pdf.pdf', 'D'); // 'D' untuk download, 'I' untuk inline view
     }
 }

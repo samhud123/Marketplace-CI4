@@ -47,7 +47,7 @@
                                                     <span class="badge text-bg-warning">-</span>
                                                 </td>
                                             <?php else : ?>
-                                                <td>Rp <?= $order['harga']; ?></td>
+                                                <td>Rp <?= number_format($order['harga'], 2, ',', '.'); ?></td>
                                             <?php endif; ?>
                                             <td>
                                                 <?php if ($order['status_order'] === 'process') : ?>
@@ -68,6 +68,7 @@
                                                 <?php if ($order['status_order'] == 'process') : ?>
                                                     <a href="/buyer/order/cancel/<?= $order['order_id']; ?>" class="btn btn-sm btn-danger"><i class="fas fa-times"></i> Cancel</a>
                                                     <?php if ($order['harga'] !== Null) : ?>
+                                                        <a href="/buyer/order/invoice/<?= $order['order_id']; ?>" class="btn btn-sm btn-info text-white"><i class="fas fa-file-invoice-dollar"></i> Invoice</a>
                                                         <form action="/buyer/order/confirm/<?= $order['order_id']; ?>" method="post">
                                                             <div class="mt-2">
                                                                 <input type="hidden" name="harga" value="<?= $order['harga']; ?>">
@@ -76,6 +77,7 @@
                                                         </form>
                                                     <?php endif; ?>
                                                 <?php elseif ($order['status_order'] == 'approved') : ?>
+                                                    <a href="/buyer/order/invoice/<?= $order['order_id']; ?>" class="btn btn-sm btn-info text-white"><i class="fas fa-file-invoice-dollar"></i> Invoice</a>
                                                     <?php if ($order['status_pembayaran'] == 'settlement') : ?>
                                                         <a href="/buyer/order/finish/<?= $order['order_id']; ?>" class="btn btn-sm btn-success">Finish</a>
                                                     <?php else : ?>

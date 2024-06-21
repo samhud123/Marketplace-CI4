@@ -5,11 +5,11 @@
     <div class="card-body">
         <h5 class="card-title fw-semibold mb-4">List Transaction</h5>
         <form action="/admin/reports/search" method="get">
-                <div class="input-group mb-3 w-50">
-                    <input type="search" class="form-control" name="keyword" placeholder="Search Buyer or Seller..." aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-primary" type="submit" id="button-addon2"><i class="ti ti-search"></i></button>
-                </div>
-            </form>
+            <div class="input-group mb-3 w-50">
+                <input type="search" class="form-control" name="keyword" placeholder="Search Buyer or Seller..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-primary" type="submit" id="button-addon2"><i class="ti ti-search"></i></button>
+            </div>
+        </form>
         <div class="table-responsive">
             <table class="table text-nowrap mb-0 align-middle">
                 <thead class="text-dark fs-4">
@@ -73,7 +73,7 @@
                                 <span class="badge <?= $bg; ?> rounded-3 fw-semibold"><?= $order['status_order']; ?></span>
                             </td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-primary">Detail</a>
+                                <a href="/admin/reports/detail/<?= $order['order_id']; ?>" class="btn btn-sm btn-primary">Detail</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

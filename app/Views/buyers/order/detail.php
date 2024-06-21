@@ -47,6 +47,10 @@
                                 <span class="badge text-bg-warning"><?= $order->status_pembayaran; ?></span>
                             </div>
                             <div class="mb-3">
+                                <label for="" class="form-label">Payment Type</label><br>
+                                <span class="badge text-bg-warning"><?= $order->payment_type; ?></span>
+                            </div>
+                            <div class="mb-3">
                                 <label for="" class="form-label">Price</label><br>
                                 <input type="text" class="form-control" value="Rp <?= $order->harga; ?>" readonly>
                             </div>

@@ -70,7 +70,7 @@
                                         </td>
                                     <?php else : ?>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">Rp <?= $order['harga']; ?></p>
+                                            <p class="mb-0 fw-normal">Rp <?= number_format($order['harga'], 2, '.', '.'); ?></p>
                                         </td>
                                     <?php endif; ?>
                                     <td class="border-bottom-0">

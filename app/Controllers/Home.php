@@ -3,18 +3,20 @@
 namespace App\Controllers;
 
 use App\Models\CategoriesModel;
+use App\Models\CommentModel;
 use App\Models\OrdersModel;
 use App\Models\ServiceModel;
 
 class Home extends BaseController
 {
-    protected $categories, $serviceModel, $ordersModel;
+    protected $categories, $serviceModel, $ordersModel, $commentModel;
 
     public function __construct()
     {
         $this->categories =  new CategoriesModel();
         $this->serviceModel = new ServiceModel();
         $this->ordersModel = new OrdersModel();
+        $this->commentModel = new CommentModel();
     }
 
     public function index(): string
@@ -65,6 +67,17 @@ class Home extends BaseController
             'services'      => $result
         ];
         return view('services', $data);
+    }
+
+    public function detail($serviceId)
+    {
+        $data = [
+            'service'       => $this->serviceModel->getServiceById($serviceId),
+            'comments'      => $this->commentModel->getCommentByService($serviceId),
+            'categories'    => $this->categories->findAll(),
+        ];
+
+        return view('service-detail', $data);
     }
 
     public function order()

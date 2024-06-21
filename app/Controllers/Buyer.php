@@ -4,17 +4,20 @@ namespace App\Controllers;
 
 use App\Models\OrdersModel;
 use App\Models\CategoriesModel;
+use App\Models\WalletModel;
 use Myth\Auth\Models\UserModel;
+use \Mpdf\Mpdf;
 
 class Buyer extends BaseController
 {
-    protected $userModel, $ordersModel, $categories;
+    protected $userModel, $ordersModel, $categories, $walletModel;
 
     public function __construct()
     {
         $this->userModel = new UserModel();
         $this->ordersModel = new OrdersModel();
         $this->categories =  new CategoriesModel();
+        $this->walletModel = new WalletModel();
     }
 
     public function index()
@@ -114,6 +117,28 @@ class Buyer extends BaseController
         return view('buyers/order/index', $data);
     }
 
+    public function invoice($orderId)
+    {
+        ini_set('max_execution_time', 3600);
+        // Inisialisasi mPDF
+        $mpdf = new Mpdf(['format' => 'A4']);
+
+        // Contoh HTML yang akan dijadikan PDF
+        $data = [
+            'order' => $this->ordersModel->getDetailOrder($orderId)
+        ];
+
+        // dd($data['order']);
+
+        $html = view('buyers/order/invoice', $data);
+
+        // Menambahkan konten HTML ke mPDF
+        $mpdf->WriteHTML($html);
+
+        // Output dalam bentuk PDF
+        $mpdf->Output('invoice.pdf', 'D'); // 'D' untuk download, 'I' untuk inline view
+    }
+
     public function detail($orderId)
     {
         $data = [
@@ -168,8 +193,8 @@ class Buyer extends BaseController
         $this->ordersModel->update($orderId, [
             'status_code' => $result['status_code'],
             'status_pembayaran' => $result['transaction_status'],
+            'payment_type' => $result['payment_type']
         ]);
-
         return redirect()->to('/buyer/order');
     }
 
@@ -186,6 +211,24 @@ class Buyer extends BaseController
         $this->ordersModel->update($orderId, [
             'status_order' => 'success'
         ]);
+
+        $order = $this->ordersModel->where('order_id', $orderId)->first();
+        $wallet = $this->walletModel->where('seller_id', $order['seller_id'])->first();
+        $biayaAdmin = (5 / 100) * $order['harga'];
+        $saldo = $order['harga'] - $biayaAdmin;
+
+        if ($wallet) {
+            $updateSaldo = $wallet['saldo'] + $saldo;
+            $this->walletModel->update($wallet['id'], [
+                'saldo' => $updateSaldo
+            ]);
+        } else {
+            $this->walletModel->insert([
+                'seller_id' => $order['seller_id'],
+                'saldo' => $saldo
+            ]);
+        }
+
         return redirect()->to('/buyer/order');
     }
 }

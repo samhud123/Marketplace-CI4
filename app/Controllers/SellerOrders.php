@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\OrdersModel;
+use \Mpdf\Mpdf;
 
 class SellerOrders extends BaseController
 {
@@ -29,6 +30,28 @@ class SellerOrders extends BaseController
             'order' => $this->ordersModel->getDetailOrderSeller($orderId, user_id())
         ];
         return view('sellers/orders/detail', $data);
+    }
+
+    public function invoice($orderId)
+    {
+        ini_set('max_execution_time', 3600);
+        // Inisialisasi mPDF
+        $mpdf = new Mpdf(['format' => 'A4']);
+
+        // Contoh HTML yang akan dijadikan PDF
+        $data = [
+            'order' => $this->ordersModel->getDetailOrder($orderId)
+        ];
+
+        // dd($data['order']);
+
+        $html = view('buyers/order/invoice', $data);
+
+        // Menambahkan konten HTML ke mPDF
+        $mpdf->WriteHTML($html);
+
+        // Output dalam bentuk PDF
+        $mpdf->Output('invoice.pdf', 'D'); // 'D' untuk download, 'I' untuk inline view
     }
 
     public function price()

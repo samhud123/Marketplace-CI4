@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2024 at 01:05 PM
+-- Generation Time: Jun 15, 2024 at 02:47 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -229,7 +229,20 @@ INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `succ
 (117, '::1', 'admin@admin.com', 2, '2024-06-08 07:13:42', 1),
 (118, '::1', 'pembeli1@gmail.com', 4, '2024-06-08 07:15:32', 0),
 (119, '::1', 'pembeli1@gmail.com', 4, '2024-06-08 07:15:57', 1),
-(120, '::1', 'penjual1@gmail.com', 1, '2024-06-08 07:18:19', 1);
+(120, '::1', 'penjual1@gmail.com', 1, '2024-06-08 07:18:19', 1),
+(121, '::1', 'admin@admin.com', 2, '2024-06-12 02:14:26', 1),
+(122, '::1', 'penjual1@gmail.com', 1, '2024-06-12 02:15:31', 1),
+(123, '::1', 'pembeli1@gmail.com', 4, '2024-06-12 03:08:13', 1),
+(124, '::1', 'penjual1@gmail.com', 1, '2024-06-12 04:04:35', 1),
+(125, '::1', 'penjual1@gmail.com', 1, '2024-06-13 11:16:01', 1),
+(126, '::1', 'pembeli1@gmail.com', 4, '2024-06-13 11:16:10', 1),
+(127, '::1', 'penjual2@gmail.com', 3, '2024-06-13 12:23:44', 1),
+(128, '::1', 'pembeli2@gmail.com', 5, '2024-06-13 23:04:49', 1),
+(129, '::1', 'pembeli1@gmail.com', 4, '2024-06-13 23:05:18', 1),
+(130, '::1', 'pembeli1@gmail.com', 4, '2024-06-14 02:11:38', 1),
+(131, '::1', 'penjual1@gmail.com', 1, '2024-06-14 02:43:59', 1),
+(132, '::1', 'penjual2@gmail.com', 3, '2024-06-14 02:45:08', 1),
+(133, '::1', 'penjual1@gmail.com', 1, '2024-06-14 07:21:44', 1);
 
 -- --------------------------------------------------------
 
@@ -352,6 +365,7 @@ CREATE TABLE `tbl_orders` (
   `status_code` int(3) NOT NULL,
   `status_order` enum('process','approved','success','rejected','cancelled') DEFAULT 'process',
   `status_pembayaran` varchar(20) DEFAULT NULL,
+  `payment_type` varchar(8) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
@@ -361,11 +375,9 @@ CREATE TABLE `tbl_orders` (
 -- Dumping data for table `tbl_orders`
 --
 
-INSERT INTO `tbl_orders` (`order_id`, `id_transaksi`, `buyer_id`, `seller_id`, `service_id`, `pesan`, `harga`, `token`, `status_code`, `status_order`, `status_pembayaran`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(18, 1259811329, 4, 1, 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', 1000000.00, '7d75686a-d8aa-4d6f-b97d-b59a58b712de', 0, 'success', 'settlement', '2024-06-05 02:54:02', '2024-06-05 02:57:55', NULL),
-(19, 0, 8, 1, 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, ', 1000000.00, '', 0, 'process', NULL, '2024-06-07 07:01:20', '2024-06-07 07:02:23', NULL),
-(20, 0, 5, 3, 3, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,', NULL, '', 0, 'process', NULL, '2024-06-08 03:53:13', '2024-06-08 03:53:13', NULL),
-(21, 0, 8, 3, 3, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,', NULL, '', 0, 'process', NULL, '2024-06-08 04:09:25', '2024-06-08 04:09:25', NULL);
+INSERT INTO `tbl_orders` (`order_id`, `id_transaksi`, `buyer_id`, `seller_id`, `service_id`, `pesan`, `harga`, `token`, `status_code`, `status_order`, `status_pembayaran`, `payment_type`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(23, 1011053621, 4, 1, 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, ', 1000000.00, '3202b188-e106-43bd-b16b-8c6436decf22', 0, 'success', 'settlement', 'qris', '2024-06-13 11:58:38', '2024-06-13 12:14:23', NULL),
+(24, 1737948295, 4, 3, 3, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,', 400000.00, '2c02fea0-2952-4763-81da-545a56b2a181', 0, 'approved', 'settlement', 'qris', '2024-06-13 12:23:26', '2024-06-14 02:22:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -444,10 +456,10 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `email`, `username`, `nama`, `no_tlp`, `alamat`, `foto`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, 'penjual1@gmail.com', 'penjual1', 'Penjual Pertama', '085648597435', 'Tegal, Jawa Tengah', '1717830710_4078647d5905a5838a09.png', '$2y$10$CfwPgmDAPsJWYFZZEegKzO2kCHGK2t/z.i/pbYX0qOHJklwLk.Igu', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-03-30 01:54:46', '2024-06-08 07:11:50', NULL),
 (2, 'admin@admin.com', 'admin', 'Admin Utama', '085648597435', 'Pekalongan, Jawa Tengah', 'default.png', '$2y$10$DwWc8kveYzKoS8P9v6Jv.u0jp8z3rB3dYE285nRqsmfpJf1GCZxq2', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-03-30 01:57:02', '2024-06-08 06:55:49', NULL),
-(3, 'penjual2@gmail.com', 'penjual2', NULL, NULL, NULL, '', '$2y$10$vtSSgahUDX/IDdtP.RV1YulwA2S7Ev7IFir6PZo6hK7GqVi.XXUmC', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-03-30 02:54:35', '2024-03-30 02:54:35', NULL),
+(3, 'penjual2@gmail.com', 'penjual2', NULL, NULL, NULL, 'default.png', '$2y$10$vtSSgahUDX/IDdtP.RV1YulwA2S7Ev7IFir6PZo6hK7GqVi.XXUmC', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-03-30 02:54:35', '2024-06-12 02:14:49', NULL),
 (4, 'pembeli1@gmail.com', 'pembeli1', 'asfasfa', '0123456789', 'Pekalongan', 'default.png', '$2y$10$ROT9oDDNRl1bYv0S2ArvYujRuWudBqcnaSCveprODj34KyCMQfxEO', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-03-30 10:49:39', '2024-06-08 07:15:47', NULL),
 (5, 'pembeli2@gmail.com', 'pembeli2', 'Pembli Kedua', '0123456789', 'Pekalongan', '1717560420_0dd7c490725835709c1d.png', '$2y$10$5je6sbKPAQOe0n.a1N.QKecyizbGNavcKnLz5DrI.uvo8oFmAoo2O', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-06-05 03:40:15', '2024-06-08 05:09:25', NULL),
-(8, 'pembeli3@gmail.com', 'pembeli3', 'Pembeli Ketiga', '0123456789', 'Batang, Jawa Tengah', '1717743628_aff40dc74a9f1ee5dd85.png', '$2y$10$4kkFvEfo7NRY59e6Aw6naeanTGaRWeWQR7jmqpLMSvtfd4ba.kWFe', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-06-07 06:37:54', '2024-06-07 09:13:36', NULL);
+(8, 'pembeli3@gmail.com', 'pembeli3', 'Pembeli Ketiga', '0123456789', 'Batang, Jawa Tengah', '1717743628_aff40dc74a9f1ee5dd85.png', '$2y$10$4kkFvEfo7NRY59e6Aw6naeanTGaRWeWQR7jmqpLMSvtfd4ba.kWFe', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-06-07 06:37:54', '2024-06-12 02:14:55', NULL);
 
 --
 -- Indexes for dumped tables
@@ -578,7 +590,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -614,7 +626,7 @@ ALTER TABLE `tbl_categories`
 -- AUTO_INCREMENT for table `tbl_orders`
 --
 ALTER TABLE `tbl_orders`
-  MODIFY `order_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `order_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `tbl_sellers`

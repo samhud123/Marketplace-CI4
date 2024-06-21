@@ -11,6 +11,7 @@
     <div class="card w-100">
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Order History</h5>
+            <!-- <a href="/seller/history/test" class="btn btn-info">Test</a> -->
             <form action="/seller/history/search" method="get">
                 <div class="input-group mb-3 w-50">
                     <input type="search" class="form-control" name="keyword" placeholder="Search Buyer..." aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -70,7 +71,7 @@
                                         </td>
                                     <?php else : ?>
                                         <td class="border-bottom-0">
-                                            <p class="mb-0 fw-normal">Rp <?= $order['harga']; ?></p>
+                                            <p class="mb-0 fw-normal">Rp <?= number_format($order['harga'], 2, '.', '.'); ?></p>
                                         </td>
                                     <?php endif; ?>
                                     <td class="border-bottom-0">

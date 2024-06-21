@@ -9,7 +9,7 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title fw-semibold mb-4"><a href="/seller/orders" class="btn btn-primary">Back</a></h5>
+            <h5 class="card-title fw-semibold mb-4"><a href="/seller/history" class="btn btn-primary">Back</a></h5>
             <?php if (session()->get('errors')) : ?>
                 <div class="alert alert-danger mb-4">
                     <?php foreach (session()->get('errors') as $error) : ?>
@@ -86,6 +86,14 @@
                         <div class="mb-3">
                             <label for="" class="form-label">Status Order</label><br>
                             <span class="badge text-bg-warning"><?= $order->status_order; ?></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Status Payment</label><br>
+                            <span class="badge text-bg-warning"><?= $order->status_pembayaran; ?></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Payment Type</label><br>
+                            <span class="badge text-bg-warning"><?= $order->payment_type; ?></span>
                         </div>
                     </div>
 

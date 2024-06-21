@@ -87,6 +87,14 @@
                             <label for="" class="form-label">Status Order</label><br>
                             <span class="badge text-bg-warning"><?= $order->status_order; ?></span>
                         </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Status Payment</label><br>
+                            <span class="badge text-bg-warning"><?= $order->status_pembayaran; ?></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="" class="form-label">Payment Type</label><br>
+                            <span class="badge text-bg-warning"><?= $order->payment_type; ?></span>
+                        </div>
                     </div>
 
                     <hr>

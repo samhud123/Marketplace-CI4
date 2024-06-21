@@ -182,7 +182,7 @@ class AuthController extends Controller
             $users = $users->withGroup('Seller');
         } elseif ($this->request->getPost('level') === 'Buyer') {
             $users = $users->withGroup('Buyer');
-        } else {
+        } elseif($this->request->getPost('level') === 'Admin') {
             $users = $users->withGroup('Admin');
         }
 

@@ -16,6 +16,7 @@ class CreateAuthTables extends Migration
             'nama'             => ['type' => 'varchar', 'constraint' => 60, 'null' => true],
             'no_tlp'           => ['type' => 'varchar', 'constraint' => 14, 'null' => true],
             'alamat'           => ['type' => 'varchar', 'constraint' => 255, 'null' => true],
+            'foto'             => ['type' => 'varchar', 'constraint' => 255],
             'password_hash'    => ['type' => 'varchar', 'constraint' => 255],
             'reset_hash'       => ['type' => 'varchar', 'constraint' => 255, 'null' => true],
             'reset_at'         => ['type' => 'datetime', 'null' => true],
