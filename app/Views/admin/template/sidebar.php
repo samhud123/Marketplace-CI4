@@ -47,6 +47,14 @@
             <span class="hide-menu">Reports</span>
         </a>
     </li>
+    <li class="sidebar-item">
+        <a class="sidebar-link <?php if ($title == "Admin | WD") echo "active"; ?>" href="/admin/wd" aria-expanded="false">
+            <span>
+                <i class="ti ti-wallet"></i>
+            </span>
+            <span class="hide-menu">WD Request</span>
+        </a>
+    </li>
     <li class="nav-small-cap">
         <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
         <span class="hide-menu">ACCOUNT</span>

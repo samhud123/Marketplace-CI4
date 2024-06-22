@@ -54,7 +54,7 @@
                                             <td><?= $order['status_pembayaran']; ?></td>
                                             <td>
                                                 <a href="/buyer/history/detail/<?= $order['order_id']; ?>" class="btn btn-sm btn-secondary"><i class="fas fa-eye"></i> Detail</a>
-                                                <a href="/buyer/history/comment/<?= $order['order_id']; ?>" class="btn btn-sm btn-primary"><i class="far fa-comment-dots"></i> Comment</a>
+                                                <a href="/buyer/history/comment/<?= $order['order_id']; ?>" class="btn btn-sm btn-primary"><i class="far fa-comment-dots"></i> Review</a>
                                             </td>
                                         </tr>
                                     <?php endif; ?>

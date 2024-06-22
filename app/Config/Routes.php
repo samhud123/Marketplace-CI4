@@ -41,6 +41,11 @@ $routes->get('/seller/history/detail/(:num)', 'SellerHistory::detail/$1', ['filt
 $routes->get('/seller/history/search', 'SellerHistory::search', ['filter' => 'role:Seller']);
 $routes->get('/seller/history/test', 'SellerHistory::test', ['filter' => 'role:Seller']);
 
+// routes sellers WD
+$routes->get('/seller/wd', 'SellerWD::index', ['filter' => 'role:Seller']);
+$routes->post('/seller/wd', 'SellerWD::withdrawal', ['filter' => 'role:Seller']);
+$routes->post('/seller/wd/norek', 'SellerWD::saveNoRek', ['filter' => 'role:Seller']);
+
 // routes buyers
 $routes->get('/buyer', 'Buyer::index', ['filter' => 'role:Buyer']);
 $routes->post('/buyer/profile', 'Buyer::saveProfile', ['filter' => 'role:Buyer']);
@@ -86,3 +91,7 @@ $routes->get('/admin/buyers/enabled/(:num)', 'ManageBuyers::enabled/$1', ['filte
 $routes->get('/admin/reports', 'AdminReports::index', ['filter' => 'role:Admin']);
 $routes->get('/admin/reports/search', 'AdminReports::search', ['filter' => 'role:Admin']);
 $routes->get('/admin/reports/detail/(:num)', 'AdminReports::detail/$1', ['filter' => 'role:Admin']);
+
+$routes->get('/admin/wd', 'AdminWD::index', ['filter' => 'role:Admin']);
+$routes->get('/admin/wd/finish/(:num)', 'AdminWD::finish/$1', ['filter' => 'role:Admin']);
+$routes->get('/admin/wd/reject/(:num)', 'AdminWD::reject/$1', ['filter' => 'role:Admin']);

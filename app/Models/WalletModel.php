@@ -9,6 +9,5 @@ class WalletModel extends Model
     protected $table          = 'tbl_wallet';
     protected $primaryKey     = 'id';
     protected $returnType     = 'array';
-    protected $allowedFields  = ['seller_id', 'wallet', 'saldo'];
-
+    protected $allowedFields  = ['seller_id', 'no_wallet', 'nama_wallet', 'saldo'];
 }
