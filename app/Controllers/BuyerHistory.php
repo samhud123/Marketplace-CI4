@@ -27,6 +27,7 @@ class BuyerHistory extends BaseController
             'categories' => $this->categories->findAll(),
             'comments' => $this->commentModel->where('buyer_id', user_id())->findAll()
         ];
+        // dd($data['comments']);
         return view('buyers/history/index', $data);
     }
 
@@ -63,6 +64,7 @@ class BuyerHistory extends BaseController
         } else {
             $this->commentModel->insert([
                 'service_id' => $this->request->getPost('service_id'),
+                'order_id' => $this->request->getPost('order_id'),
                 'buyer_id' => user_id(),
                 'rating' => $this->request->getPost('star'),
                 'comment' => $this->request->getPost('comment'),

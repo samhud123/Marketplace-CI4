@@ -63,6 +63,7 @@
                         <form action="/buyer/history/comment/" method="post">
                             <?= csrf_field(); ?>
                             <input type="hidden" name="service_id" value="<?= $order->service_id; ?>">
+                            <input type="hidden" name="order_id" value="<?= $order->order_id; ?>">
                             <div>
                                 <h2 class="fs-5 my-4 fw-bold"><i class="fas fa-star"></i> Rating</h2>
                                 <div class="stars">

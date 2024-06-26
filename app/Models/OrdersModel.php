@@ -20,6 +20,7 @@ class OrdersModel extends Model
         return $this->db->table('tbl_orders')
             ->join('tbl_services', 'tbl_services.service_id = tbl_orders.service_id')
             ->where('buyer_id', $userId)
+            ->orderBy('created_at', 'DESC')
             ->get()->getResultArray();
     }
 
