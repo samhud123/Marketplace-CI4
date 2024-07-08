@@ -46,6 +46,7 @@ class Home extends BaseController
             'services' => $this->serviceModel->serviceCategory($findCategory['id_categories'])
         ];
 
+        // dd($data['services']);
         return view('category', $data);
     }
 

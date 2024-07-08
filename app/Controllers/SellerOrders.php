@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\OrdersModel;
 use \Mpdf\Mpdf;
+use CodeIgniter\HTTP\DownloadResponse;
 
 class SellerOrders extends BaseController
 {
@@ -29,7 +30,24 @@ class SellerOrders extends BaseController
             'title' => 'Seller | Orders',
             'order' => $this->ordersModel->getDetailOrderSeller($orderId, user_id())
         ];
+        // dd($data['order']);
         return view('sellers/orders/detail', $data);
+    }
+
+    public function download_zip($file_name)
+    {
+        if (!$file_name) {
+            return redirect()->to('/seller/orders')->withInput()->with('errors', 'File not found');
+        }
+
+        $file = WRITEPATH . 'uploads/' . $file_name;
+
+        if (file_exists($file)) {
+            // return new DownloadResponse($file, null, true);
+            return $this->response->download($file, null);
+        } else {
+            return redirect()->to('/seller/orders')->withInput()->with('errors', 'File not found');
+        }
     }
 
     public function invoice($orderId)

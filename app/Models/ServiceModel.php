@@ -45,6 +45,7 @@ class ServiceModel extends Model
     public function serviceCategory($idCategory)
     {
         return $this->db->table('tbl_services')
+            ->select('tbl_services.*, users.username, tbl_categories.id_categories, tbl_categories.category_name')
             ->join('tbl_categories', 'tbl_categories.id_categories = tbl_services.category_id')
             ->join('users', 'tbl_services.user_id = users.id')
             ->where('category_id', $idCategory)

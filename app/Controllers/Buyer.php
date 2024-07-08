@@ -146,47 +146,66 @@ class Buyer extends BaseController
             'order' => $this->ordersModel->getDetailOrderBuyer($orderId, user_id()),
             'categories' => $this->categories->findAll(),
         ];
+        // dd($data['order']);
         return view('buyers/order/detail', $data);
     }
 
     public function confirm($orderId)
     {
-        $id_transaksi = rand();
-        // Set your Merchant Server Key
-        \Midtrans\Config::$serverKey = 'SB-Mid-server-c_uIzFpCcATE9-3OEyNZTPH6';
-        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
-        \Midtrans\Config::$isProduction = false;
-        // Set sanitization on (default)
-        \Midtrans\Config::$isSanitized = true;
-        // Set 3DS transaction for credit card to true
-        \Midtrans\Config::$is3ds = true;
+        // dd($this->request->getFile('file_zip'));
+        $validationRule = [
+            'file_zip' => [
+                'label' => 'ZIP File',
+                'rules' => 'uploaded[file_zip]|mime_in[file_zip,application/zip,application/x-zip-compressed,multipart/x-zip]|max_size[file_zip,20480]', // 20 MB max
+            ],
+        ];
 
-        $params = array(
-            'transaction_details' => array(
-                'order_id' => $id_transaksi,
-                'gross_amount' => $this->request->getVar('harga'),
-            ),
-            'customer_details' => array(
-                'first_name' => user()->nama,
-                'email' => user()->email,
-                'phone' => user()->no_tlp,
-            ),
-        );
+        if (!$this->validate($validationRule)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        } else {
+            $id_transaksi = rand();
+            // Set your Merchant Server Key
+            \Midtrans\Config::$serverKey = 'SB-Mid-server-c_uIzFpCcATE9-3OEyNZTPH6';
+            // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+            \Midtrans\Config::$isProduction = false;
+            // Set sanitization on (default)
+            \Midtrans\Config::$isSanitized = true;
+            // Set 3DS transaction for credit card to true
+            \Midtrans\Config::$is3ds = true;
 
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
-        $token = $snapToken;
+            $params = array(
+                'transaction_details' => array(
+                    'order_id' => $id_transaksi,
+                    'gross_amount' => $this->request->getVar('harga'),
+                ),
+                'customer_details' => array(
+                    'first_name' => user()->nama,
+                    'email' => user()->email,
+                    'phone' => user()->no_tlp,
+                ),
+            );
 
-        $this->ordersModel->update($orderId, [
-            'id_transaksi' => $id_transaksi,
-            'token' => $token,
-            'status_order' => 'approved'
-        ]);
-        return redirect()->to('/buyer/order');
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+            $token = $snapToken;
+
+            $file = $this->request->getFile('file_zip');
+            $fileName = $file->getRandomName();
+            $file->move(WRITEPATH . 'uploads', $fileName);
+
+            $this->ordersModel->update($orderId, [
+                'id_transaksi' => $id_transaksi,
+                'token' => $token,
+                'status_order' => 'approved',
+                'file_name' => $fileName
+            ]);
+            return redirect()->to('/buyer/order');
+        }
     }
 
     public function payment($orderId)
     {
         $result = json_decode($this->request->getPost('result_data'), true);
+        // dd($result);
 
         // dd($result);
 
@@ -230,5 +249,21 @@ class Buyer extends BaseController
         }
 
         return redirect()->to('/buyer/order');
+    }
+
+    public function download_file($fileName)
+    {
+        if (!$fileName) {
+            return redirect()->to('/buyer/order')->withInput()->with('errors', 'File not found');
+        }
+
+        $file = WRITEPATH . 'uploads/' . $fileName;
+
+        if (file_exists($file)) {
+            // return new DownloadResponse($file, null, true);
+            return $this->response->download($file, null);
+        } else {
+            return redirect()->to('/buyer/order')->withInput()->with('errors', 'File not found');
+        }
     }
 }

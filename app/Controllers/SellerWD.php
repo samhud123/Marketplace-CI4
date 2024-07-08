@@ -28,21 +28,25 @@ class SellerWD extends BaseController
 
     public function withdrawal()
     {
+        $request_wd = $this->request->getPost('jumlah_wd');
+        $jumlah_wd = (int) preg_replace('/\D/', '', $request_wd);
+        // dd($jumlah_wd);
+
         $wallet = $this->walletModel->where('id', $this->request->getPost('wallet_id'))->first();
-        if ($this->request->getPost('jumlah_wd') > $wallet['saldo']) {
+        if ($jumlah_wd > $wallet['saldo']) {
             session()->setFlashdata('errors', 'Your balance is insufficient!');
             return redirect()->to('/seller/wd');
         } else {
             $this->wdModel->insert([
                 'seller_id' => user_id(),
                 'wallet_id' => $wallet['id'],
-                'jml_wd' => $this->request->getPost('jumlah_wd'),
+                'jml_wd' => $jumlah_wd,
                 'status_wd' => 'process',
                 'created_at' => date('Y-m-d H:i:s')
             ]);
 
             $this->walletModel->update($wallet['id'], [
-                'saldo' => $wallet['saldo'] - $this->request->getPost('jumlah_wd')
+                'saldo' => $wallet['saldo'] - $jumlah_wd
             ]);
 
             session()->setFlashdata('message', 'Wait for the withdrawal process');

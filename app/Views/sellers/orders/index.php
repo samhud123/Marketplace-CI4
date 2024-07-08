@@ -7,6 +7,13 @@
     </div>
 </div>
 
+<?php if (session()->get('errors')) : ?>
+    <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
+        <?= session()->get('errors'); ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
 <div class="col-lg-12 d-flex align-items-stretch">
     <div class="card w-100">
         <div class="card-body p-4">

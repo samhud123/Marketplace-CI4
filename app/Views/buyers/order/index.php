@@ -69,12 +69,34 @@
                                                     <a href="/buyer/order/cancel/<?= $order['order_id']; ?>" class="btn btn-sm btn-danger"><i class="fas fa-times"></i> Cancel</a>
                                                     <?php if ($order['harga'] !== Null) : ?>
                                                         <a href="/buyer/order/invoice/<?= $order['order_id']; ?>" class="btn btn-sm btn-info text-white"><i class="fas fa-file-invoice-dollar"></i> Invoice</a>
-                                                        <form action="/buyer/order/confirm/<?= $order['order_id']; ?>" method="post">
-                                                            <div class="mt-2">
-                                                                <input type="hidden" name="harga" value="<?= $order['harga']; ?>">
-                                                                <button type="submit" class="btn btn-sm btn-primary"><i class="fas fa-check"></i> Confirm</button>
+                                                        <button type="button" class="btn btn-sm btn-primary mt-1" data-bs-toggle="modal" data-bs-target="#konfirmasi<?= $order['order_id']; ?>">
+                                                            <i class="fas fa-check"></i>Confirm
+                                                        </button>
+                                                        <div class="modal fade" id="konfirmasi<?= $order['order_id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Upload File</h1>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <form action="/buyer/order/confirm/<?= $order['order_id']; ?>" method="post" enctype="multipart/form-data">
+                                                                        <?= csrf_field(); ?>
+                                                                        <div class="modal-body">
+                                                                            <input type="hidden" name="harga" value="<?= $order['harga']; ?>">
+                                                                            <div>
+                                                                                <label for="file_zip">Project File Materials</label>
+                                                                                <input type="file" name="file_zip" id="file_zip" accept=".zip" class="form-control" required>
+                                                                                <small id="file_zip" class="form-text text-danger">Upload in .zip file format</small>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                            <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Confirm</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
                                                             </div>
-                                                        </form>
+                                                        </div>
                                                     <?php endif; ?>
                                                 <?php elseif ($order['status_order'] == 'approved') : ?>
                                                     <a href="/buyer/order/invoice/<?= $order['order_id']; ?>" class="btn btn-sm btn-info text-white"><i class="fas fa-file-invoice-dollar"></i> Invoice</a>

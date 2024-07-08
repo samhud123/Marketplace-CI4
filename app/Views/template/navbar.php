@@ -17,7 +17,7 @@
                         <a href="<?= base_url(); ?>register" class="me-4 border rounded py-1 px-3 nav-link d-flex align-items-center" style="border-color: #0d6efd">
                             <i class="fas fa-store m-1 me-md-2 text-secondary"></i>
                             <p class="d-none d-md-block mb-0 text-secondary">
-                                Become a Seller
+                                Register
                             </p>
                         </a>
 

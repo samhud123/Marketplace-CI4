@@ -12,7 +12,7 @@ class OrdersModel extends Model
     protected $useSoftDeletes = true;
 
     protected $useAutoIncrement = true;
-    protected $allowedFields = ['buyer_id', 'id_transaksi', 'seller_id', 'service_id', 'pesan', 'harga', 'token', 'status_order', 'status_pembayaran', 'payment_type', 'confirm_penjual', 'confirm_pembeli'];
+    protected $allowedFields = ['buyer_id', 'id_transaksi', 'seller_id', 'service_id', 'pesan', 'harga', 'token', 'status_order', 'status_pembayaran', 'payment_type', 'file_name'];
 
     // order buyer
     public function getNewOrders($userId)
@@ -40,7 +40,7 @@ class OrdersModel extends Model
     public function getDetailOrderSeller($orderId, $sellerId)
     {
         return $this->db->table('tbl_orders')
-            ->select('tbl_orders.order_id, tbl_services.foto, tbl_services.judul, tbl_services.deskripsi, users.username, users.nama, users.email, users.no_tlp, users.alamat, tbl_orders.pesan, tbl_orders.status_order, tbl_orders.harga, tbl_orders.status_pembayaran, tbl_orders.payment_type')
+            ->select('tbl_orders.order_id, tbl_services.foto, tbl_services.judul, tbl_services.deskripsi, users.username, users.nama, users.email, users.no_tlp, users.alamat, tbl_orders.pesan, tbl_orders.status_order, tbl_orders.harga, tbl_orders.status_pembayaran, tbl_orders.payment_type, tbl_orders.file_name')
             ->join('tbl_services', 'tbl_services.service_id = tbl_orders.service_id')
             ->join('users', 'tbl_orders.buyer_id = users.id')
             ->where('order_id', $orderId)
@@ -52,7 +52,7 @@ class OrdersModel extends Model
     public function getDetailOrderBuyer($orderId, $buyerId)
     {
         return $this->db->table('tbl_orders')
-            ->select('tbl_orders.order_id, tbl_services.foto, tbl_services.service_id, tbl_services.judul, tbl_services.deskripsi, users.username, users.nama, users.email, users.no_tlp, users.alamat, tbl_orders.pesan, tbl_orders.status_order, tbl_orders.harga, tbl_orders.status_pembayaran, tbl_orders.payment_type')
+            ->select('tbl_orders.order_id, tbl_services.foto, tbl_services.service_id, tbl_services.judul, tbl_services.deskripsi, users.username, users.nama, users.email, users.no_tlp, users.alamat, tbl_orders.pesan, tbl_orders.status_order, tbl_orders.harga, tbl_orders.status_pembayaran, tbl_orders.payment_type, tbl_orders.file_name')
             ->join('tbl_services', 'tbl_services.service_id = tbl_orders.service_id')
             ->join('users', 'tbl_orders.seller_id = users.id')
             ->where('order_id', $orderId)

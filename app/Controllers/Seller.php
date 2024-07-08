@@ -20,12 +20,29 @@ class Seller extends BaseController
     {
         $data = [
             'title' => 'Seller | Dashboard',
-            'orders_complate' => $this->ordersModel->where('seller_id', user_id())->where('status_order', 'success')->countAllResults(),
-            'incoming_orders' => $this->ordersModel->where('seller_id', user_id())->where('status_order', 'process')->orWhere('status_order', 'approved')->countAllResults(),
-            'orders_failed' => $this->ordersModel->where('seller_id', user_id())->where('status_order', 'rejected')->orWhere('status_order', 'cancelled')->countAllResults(),
-            'saldo' => $this->walletModel->where('seller_id', user_id())->first()
+            'orders_complate' => $this->ordersModel
+                                        ->where('seller_id', user_id())
+                                        ->where('status_order', 'success')
+                                        ->countAllResults(),
+            'incoming_orders' => $this->ordersModel
+                                        ->where('seller_id', user_id())
+                                        ->groupStart()
+                                            ->where('status_order', 'process')
+                                            ->orWhere('status_order', 'approved')
+                                        ->groupEnd()
+                                        ->countAllResults(),
+            'orders_failed' => $this->ordersModel
+                                        ->where('seller_id', user_id())
+                                        ->groupStart()
+                                            ->where('status_order', 'rejected')
+                                            ->orWhere('status_order', 'cancelled')
+                                        ->groupEnd()
+                                        ->countAllResults(),
+            'saldo' => $this->walletModel
+                                ->where('seller_id', user_id())
+                                ->first()
         ];
-
+        // dd($data['incoming_orders']);
         return view('sellers/index', $data);
     }
 

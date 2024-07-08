@@ -30,6 +30,7 @@ $routes->delete('/seller/delService/(:num)', 'SellerService::delete/$1', ['filte
 
 // routes sellers orders
 $routes->get('/seller/orders', 'SellerOrders::index', ['filter' => 'role:Seller']);
+$routes->get('/seller/orders/download/(:segment)', 'SellerOrders::download_zip/$1', ['filter' => 'role:Seller']);
 $routes->get('/seller/orders/invoice/(:num)', 'SellerOrders::invoice/$1', ['filter' => 'role:Seller']);
 $routes->get('/seller/orders/detail/(:num)', 'SellerOrders::detail/$1', ['filter' => 'role:Seller']);
 $routes->post('/seller/orders/price', 'SellerOrders::price', ['filter' => 'role:Seller']);
@@ -57,6 +58,7 @@ $routes->post('/buyer/order/payment/(:num)', 'Buyer::payment/$1', ['filter' => '
 $routes->post('/buyer/order/confirm/(:num)', 'Buyer::confirm/$1', ['filter' => 'role:Buyer']);
 $routes->get('/buyer/order/cancel/(:num)', 'Buyer::cancel/$1', ['filter' => 'role:Buyer']);
 $routes->get('/buyer/order/finish/(:num)', 'Buyer::finish/$1', ['filter' => 'role:Buyer']);
+$routes->get('/buyer/order/download/(:segment)', 'Buyer::download_file/$1', ['filter' => 'role:Buyer']);
 
 $routes->get('/buyer/history', 'BuyerHistory::index', ['filter' => 'role:Buyer']);
 $routes->get('/buyer/history/detail/(:num)', 'BuyerHistory::detail/$1', ['filter' => 'role:Buyer']);

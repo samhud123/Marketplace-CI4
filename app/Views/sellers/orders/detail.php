@@ -95,6 +95,14 @@
                             <label for="" class="form-label">Payment Type</label><br>
                             <span class="badge text-bg-warning"><?= $order->payment_type; ?></span>
                         </div>
+                        <?php if ($order->file_name != null) : ?>
+                            <div class="mb-3">
+                                <label for="" class="form-label">File Project Materials</label><br>
+                                <a href="/seller/orders/download/<?= $order->file_name; ?>">
+                                    <img src="/img/zip.png" alt="" width="50"><span class="ms-1">Download file</span>
+                                </a>
+                            </div>
+                        <?php endif; ?>
                     </div>
 
                     <hr>

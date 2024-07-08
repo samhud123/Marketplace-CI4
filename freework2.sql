@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2024 at 02:47 PM
+-- Generation Time: Jul 08, 2024 at 04:24 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -52,9 +52,9 @@ CREATE TABLE `auth_groups` (
 --
 
 INSERT INTO `auth_groups` (`id`, `name`, `description`) VALUES
-(1, 'Admin', 'Super-User'),
-(2, 'Seller', 'Akun-Penjual'),
-(3, 'Buyer', 'Akun-Pembeli');
+(1, 'Admin', 'User-Admin'),
+(2, 'Seller', 'User-Seller'),
+(3, 'Buyer', 'User-Buyer');
 
 -- --------------------------------------------------------
 
@@ -83,12 +83,12 @@ CREATE TABLE `auth_groups_users` (
 --
 
 INSERT INTO `auth_groups_users` (`group_id`, `user_id`) VALUES
-(1, 2),
-(2, 1),
-(2, 3),
-(3, 4),
-(3, 5),
-(3, 8);
+(1, 1),
+(2, 2),
+(2, 6),
+(2, 7),
+(3, 3),
+(3, 5);
 
 -- --------------------------------------------------------
 
@@ -110,139 +110,69 @@ CREATE TABLE `auth_logins` (
 --
 
 INSERT INTO `auth_logins` (`id`, `ip_address`, `email`, `user_id`, `date`, `success`) VALUES
-(1, '::1', 'penjual1@gmail.com', 1, '2024-03-30 01:54:57', 1),
-(2, '::1', 'admin@admin.com', 2, '2024-03-30 01:57:12', 1),
-(3, '::1', 'admin@admin.com', 2, '2024-03-30 01:58:06', 1),
-(4, '::1', 'penjual1@gmail.com', 1, '2024-03-30 02:33:50', 1),
-(5, '::1', 'penjual2@gmail.com', 3, '2024-03-30 02:54:48', 1),
-(6, '::1', 'penjual1@gmail.com', 1, '2024-03-30 02:55:46', 1),
-(7, '::1', 'penjual2@gmail.com', 3, '2024-03-30 03:17:52', 1),
-(8, '::1', 'penjual1@gmail.com', 1, '2024-03-30 03:18:06', 1),
-(9, '::1', 'penjual2@gmail.com', 3, '2024-03-30 04:30:59', 1),
-(10, '::1', 'penjual1@gmail.com', 1, '2024-03-30 04:32:21', 1),
-(11, '::1', 'penjual1@gmail.com', 1, '2024-03-30 09:55:05', 1),
-(12, '::1', 'admin@admin.com', 2, '2024-03-30 10:24:57', 1),
-(13, '::1', 'pembeli1@gmail.com', 4, '2024-03-30 10:49:45', 1),
-(14, '::1', 'admin@admin.com', 2, '2024-03-30 10:50:27', 1),
-(15, '::1', 'pembeli1@gmail.com', 4, '2024-03-30 10:51:11', 1),
-(16, '::1', 'penjual1@gmail.com', 1, '2024-03-31 02:36:00', 1),
-(17, '::1', 'penjual2@gmail.com', 3, '2024-03-31 02:37:33', 1),
-(18, '::1', 'pembeli1@gmail.com', 4, '2024-03-31 02:40:33', 1),
-(19, '::1', 'admin@admin.com', 2, '2024-04-01 00:53:49', 1),
-(20, '::1', 'pembeli1@gmail.com', 4, '2024-04-01 02:59:20', 1),
-(21, '::1', 'admin@admin.com', 2, '2024-04-01 05:24:51', 1),
-(22, '::1', 'pembeli1@gmail.com', 4, '2024-04-02 22:59:26', 1),
-(23, '::1', 'penjual1@gmail.com', 1, '2024-04-03 02:52:35', 1),
-(24, '::1', 'pembeli1@gmail.com', 4, '2024-04-03 02:53:01', 1),
-(25, '::1', 'admin@admin.com', 2, '2024-04-03 03:05:27', 1),
-(26, '::1', 'pembeli1@gmail.com', 4, '2024-04-04 03:27:18', 1),
-(27, '::1', 'pembeli1@gmail.com', 4, '2024-04-04 10:10:02', 1),
-(28, '::1', 'penjual1@gmail.com', 1, '2024-04-04 11:16:44', 1),
-(29, '::1', 'penjual1@gmail.com', 1, '2024-04-10 10:06:05', 1),
-(30, '::1', 'penjual1@gmail.com', 1, '2024-04-23 23:22:48', 1),
-(31, '::1', 'pembeli1@gmail.com', 4, '2024-04-23 23:23:39', 1),
-(32, '::1', 'penjual1@gmail.com', 1, '2024-04-23 23:28:42', 1),
-(33, '::1', 'penjual1@gmail.com', 1, '2024-04-25 22:23:26', 1),
-(34, '::1', 'pembeli1@gmail.com', 4, '2024-04-25 22:25:51', 1),
-(35, '::1', 'penjual2@gmail.com', 3, '2024-04-25 22:29:07', 1),
-(36, '::1', 'penjual1@gmail.com', 1, '2024-04-25 23:04:36', 1),
-(37, '::1', 'penjual2@gmail.com', 3, '2024-04-25 23:04:55', 1),
-(38, '::1', 'admin@admin.com', 2, '2024-04-25 23:08:11', 1),
-(39, '::1', 'penjual2@gmail.com', 3, '2024-04-25 23:09:41', 1),
-(40, '::1', 'penjual2@gmail.com', 3, '2024-04-26 10:17:52', 1),
-(41, '::1', 'pembeli1@gmail.com', 4, '2024-04-26 10:18:25', 1),
-(42, '::1', 'penjual1@gmail.com', 1, '2024-05-07 12:36:56', 1),
-(43, '::1', 'pembeli1@gmail.com', 4, '2024-05-07 12:37:36', 1),
-(44, '::1', 'penjual2@gmail.com', 3, '2024-05-07 12:38:45', 1),
-(45, '::1', 'penjual1@gmail.com', 1, '2024-05-19 23:46:43', 1),
-(46, '::1', 'pembeli1@gmail.com', 4, '2024-05-19 23:47:46', 1),
-(47, '::1', 'pembeli1@gmail.com', 4, '2024-05-20 02:27:21', 1),
-(48, '::1', 'penjual2@gmail.com', 3, '2024-05-20 02:51:23', 1),
-(49, '::1', 'penjual1@gmail.com', 1, '2024-05-20 02:51:59', 1),
-(50, '::1', 'penjual1@gmail.com', 1, '2024-05-20 12:26:11', 1),
-(51, '::1', 'pembeli1@gmail.com', 4, '2024-05-20 12:29:43', 1),
-(52, '::1', 'penjual1@gmail.com', 1, '2024-05-21 06:37:54', 1),
-(53, '::1', 'pembeli1@gmail.com', 4, '2024-05-21 06:38:36', 1),
-(54, '::1', 'penjual2@gmail.com', 3, '2024-05-21 08:09:52', 1),
-(55, '::1', 'penjual2@gmail.com', 3, '2024-05-21 08:12:09', 1),
-(56, '::1', 'pembeli1@gmail.com', NULL, '2024-05-23 12:50:55', 0),
-(57, '::1', 'pembeli1@gmail.com', 4, '2024-05-23 12:51:01', 1),
-(58, '::1', 'penjual1@gmail.com', 1, '2024-05-23 13:10:17', 1),
-(59, '::1', 'penjual2@gmail.com', 3, '2024-05-23 14:07:11', 1),
-(60, '::1', 'penjual1@gmail.com', 1, '2024-05-23 14:45:30', 1),
-(61, '::1', 'pembeli1@gmail.com', 4, '2024-05-23 22:00:59', 1),
-(62, '::1', 'pembeli1@gmail.com', 4, '2024-05-23 22:09:42', 1),
-(63, '::1', 'penjual1@gmail.com', 1, '2024-05-23 22:10:07', 1),
-(64, '::1', 'penjual2@gmail.com', 3, '2024-05-23 22:12:05', 1),
-(65, '::1', 'pembeli1@gmail.com', 4, '2024-05-23 22:18:15', 1),
-(66, '::1', 'admin@admin.com', 2, '2024-05-23 23:41:50', 1),
-(67, '::1', 'penjual1@gmail.com', 1, '2024-05-24 00:59:20', 1),
-(68, '::1', 'penjual2@gmail.com', 3, '2024-05-24 00:59:53', 1),
-(69, '::1', 'pembeli1@gmail.com', 4, '2024-05-25 00:28:36', 1),
-(70, '::1', 'penjual1@gmail.com', 1, '2024-05-25 00:31:11', 1),
-(71, '::1', 'pembeli1@gmail.com', 4, '2024-05-25 01:02:06', 1),
-(72, '::1', 'admin@admin.com', 2, '2024-05-25 01:39:39', 1),
-(73, '::1', 'penjual1@gmail.com', 1, '2024-05-25 01:50:08', 1),
-(74, '::1', 'penjual1@gmail.com', 1, '2024-05-29 02:22:35', 1),
-(75, '::1', 'pembeli1@gmail.com', NULL, '2024-05-29 02:23:16', 0),
-(76, '::1', 'pembeli1@gmail.com', 4, '2024-05-29 02:23:23', 1),
-(77, '::1', 'penjual2@gmail.com', 3, '2024-05-29 02:36:45', 1),
-(78, '::1', 'penjual1@gmail.com', 1, '2024-05-29 02:37:36', 1),
-(79, '::1', 'pembeli1@gmail.com', 4, '2024-05-29 02:46:31', 1),
-(80, '::1', 'pembeli1@gmail.com', 4, '2024-05-29 02:46:36', 1),
-(81, '::1', 'pembeli1@gmail.com', NULL, '2024-05-29 02:53:21', 0),
-(82, '::1', 'pembeli1@gmail.com', 4, '2024-05-29 02:53:31', 1),
-(83, '::1', 'penjual1@gmail.com', 1, '2024-05-29 02:54:52', 1),
-(84, '::1', 'penjual1@gmail.com', 1, '2024-05-29 04:05:03', 1),
-(85, '::1', 'penjual2@gmail.com', 3, '2024-05-29 04:39:10', 1),
-(86, '::1', 'penjual1@gmail.com', 1, '2024-05-29 11:45:43', 1),
-(87, '::1', 'penjual2@gmail.com', 3, '2024-05-29 13:31:54', 1),
-(88, '::1', 'penjual1@gmail.com', 1, '2024-05-29 13:34:06', 1),
-(89, '::1', 'penjual1@gmail.com', 1, '2024-05-29 13:35:37', 1),
-(90, '::1', 'penjual2@gmail.com', 3, '2024-05-29 13:35:52', 1),
-(91, '::1', 'penjual1@gmail.com', 1, '2024-05-29 13:44:43', 1),
-(92, '::1', 'penjual1@gmail.com', 1, '2024-05-29 14:01:38', 1),
-(93, '::1', 'penjual2@gmail.com', 3, '2024-05-29 14:02:13', 1),
-(94, '::1', 'pembeli1@gmail.com', 4, '2024-06-05 02:27:16', 1),
-(95, '::1', 'penjual1@gmail.com', 1, '2024-06-05 02:30:02', 1),
-(96, '::1', 'admin@admin.com', 2, '2024-06-05 03:17:34', 1),
-(97, '::1', 'penjual1@gmail.com', 1, '2024-06-05 03:19:03', 1),
-(98, '::1', 'pembeli1@gmail.com', 4, '2024-06-05 03:37:54', 1),
-(99, '::1', 'pembeli1@gmail.com', 4, '2024-06-05 03:39:09', 1),
-(100, '::1', 'pembeli2@gmail.com', 5, '2024-06-05 03:40:23', 1),
-(101, '::1', 'pembeli1@gmail.com', 4, '2024-06-05 04:12:01', 1),
-(102, '::1', 'pembeli2@gmail.com', 5, '2024-06-05 04:44:11', 1),
-(103, '::1', 'penjual1@gmail.com', 1, '2024-06-07 06:24:28', 1),
-(104, '::1', 'pembeli3@gmail.com', 8, '2024-06-07 06:38:08', 1),
-(105, '::1', 'admin@admin.com', 2, '2024-06-07 06:43:09', 1),
-(106, '::1', 'penjual1@gmail.com', 1, '2024-06-07 07:01:33', 1),
-(107, '::1', 'admin@admin.com', 2, '2024-06-07 07:06:24', 1),
-(108, '::1', 'pembeli1@gmail.com', 4, '2024-06-07 08:38:52', 0),
-(109, '::1', 'admin@admin.com', 2, '2024-06-08 03:02:46', 1),
-(110, '::1', 'pembeli1@gmail.com', 4, '2024-06-08 03:21:35', 0),
-(111, '::1', 'pembeli2@gmail.com', 5, '2024-06-08 03:22:11', 1),
-(112, '::1', 'penjual1@gmail.com', 1, '2024-06-08 03:25:10', 1),
-(113, '::1', 'pembeli2@gmail.com', 5, '2024-06-08 03:52:56', 1),
-(114, '::1', 'pembeli3@gmail.com', 8, '2024-06-08 04:09:16', 1),
-(115, '::1', 'pembeli2@gmail.com', 5, '2024-06-08 05:12:29', 1),
-(116, '::1', 'penjual1@gmail.com', 1, '2024-06-08 06:58:45', 1),
-(117, '::1', 'admin@admin.com', 2, '2024-06-08 07:13:42', 1),
-(118, '::1', 'pembeli1@gmail.com', 4, '2024-06-08 07:15:32', 0),
-(119, '::1', 'pembeli1@gmail.com', 4, '2024-06-08 07:15:57', 1),
-(120, '::1', 'penjual1@gmail.com', 1, '2024-06-08 07:18:19', 1),
-(121, '::1', 'admin@admin.com', 2, '2024-06-12 02:14:26', 1),
-(122, '::1', 'penjual1@gmail.com', 1, '2024-06-12 02:15:31', 1),
-(123, '::1', 'pembeli1@gmail.com', 4, '2024-06-12 03:08:13', 1),
-(124, '::1', 'penjual1@gmail.com', 1, '2024-06-12 04:04:35', 1),
-(125, '::1', 'penjual1@gmail.com', 1, '2024-06-13 11:16:01', 1),
-(126, '::1', 'pembeli1@gmail.com', 4, '2024-06-13 11:16:10', 1),
-(127, '::1', 'penjual2@gmail.com', 3, '2024-06-13 12:23:44', 1),
-(128, '::1', 'pembeli2@gmail.com', 5, '2024-06-13 23:04:49', 1),
-(129, '::1', 'pembeli1@gmail.com', 4, '2024-06-13 23:05:18', 1),
-(130, '::1', 'pembeli1@gmail.com', 4, '2024-06-14 02:11:38', 1),
-(131, '::1', 'penjual1@gmail.com', 1, '2024-06-14 02:43:59', 1),
-(132, '::1', 'penjual2@gmail.com', 3, '2024-06-14 02:45:08', 1),
-(133, '::1', 'penjual1@gmail.com', 1, '2024-06-14 07:21:44', 1);
+(1, '::1', 'penjual1@gmail.com', 2, '2024-06-20 12:01:50', 1),
+(2, '::1', 'pembeli1@gmail.com', 3, '2024-06-20 12:02:55', 1),
+(3, '::1', 'admin@gmail.com', 1, '2024-06-20 12:04:20', 1),
+(4, '::1', 'penjual1@gmail.com', 2, '2024-06-20 12:10:27', 1),
+(5, '::1', 'admin@gmail.com', 1, '2024-06-20 12:26:08', 1),
+(6, '::1', 'penjual1@gmail.com', 2, '2024-06-20 12:26:55', 1),
+(7, '::1', 'penjual1@gmail.com', 2, '2024-06-21 01:03:22', 1),
+(8, '::1', 'pembeli1@gmail.com', 3, '2024-06-21 01:04:04', 1),
+(9, '::1', 'admin@gmail.com', 1, '2024-06-21 02:38:34', 1),
+(10, '::1', 'penjual1@gmail.com', 2, '2024-06-21 02:39:21', 1),
+(11, '::1', 'pembeli2@gmail.com', 5, '2024-06-21 04:14:38', 1),
+(12, '::1', 'pembeli1@gmail.com', 3, '2024-06-21 04:22:49', 1),
+(13, '::1', 'pembeli1@gmail.com', 3, '2024-06-21 05:51:36', 1),
+(14, '::1', 'pembeli2@gmail.com', 5, '2024-06-21 05:52:40', 1),
+(15, '::1', 'pembeli1@gmail.com', 3, '2024-06-21 06:10:31', 1),
+(16, '::1', 'pembeli2@gmail.com', 5, '2024-06-21 06:24:00', 1),
+(17, '::1', 'pembeli1@gmail.com', 3, '2024-06-21 06:26:23', 1),
+(18, '::1', 'penjual2@gmail.com', 6, '2024-06-21 06:44:35', 1),
+(19, '::1', 'penjual1@gmail.com', 2, '2024-06-21 08:45:44', 1),
+(20, '::1', 'penjual3@gmail.com', 7, '2024-06-21 09:35:48', 1),
+(21, '::1', 'penjual1@gmail.com', 2, '2024-06-21 09:55:05', 1),
+(22, '::1', 'penjual3', NULL, '2024-06-21 09:57:59', 0),
+(23, '::1', 'penjual3@gmail.com', 7, '2024-06-21 09:58:06', 1),
+(24, '::1', 'penjual1@gmail.com', 2, '2024-06-21 09:59:26', 1),
+(25, '::1', 'penjual2@gmail.com', 6, '2024-06-21 10:03:24', 1),
+(26, '::1', 'pembeli1@gmail.com', 3, '2024-06-21 12:07:04', 1),
+(27, '::1', 'penjual1@gmail.com', 2, '2024-06-22 00:22:12', 1),
+(28, '::1', 'admin@gmail.com', 1, '2024-06-22 00:25:31', 1),
+(29, '::1', 'pembeli1@gmail.com', 3, '2024-06-22 02:51:33', 1),
+(30, '::1', 'pembeli1@gmail.com', NULL, '2024-06-25 11:03:17', 0),
+(31, '::1', 'pembeli1@gmail.com', 3, '2024-06-25 11:03:24', 1),
+(32, '::1', 'penjual1@gmail.com', 2, '2024-06-25 11:34:53', 1),
+(33, '::1', 'pembeli2@gmail.com', 5, '2024-06-25 11:36:24', 1),
+(34, '::1', 'pembeli1@gmail.com', 3, '2024-06-25 11:39:05', 1),
+(35, '::1', 'samirulhuda87@gmail.com', NULL, '2024-06-26 02:08:52', 0),
+(36, '::1', 'penjual1@gmail.com', 2, '2024-06-26 02:09:03', 1),
+(37, '::1', 'pembeli1@gmail.com', 3, '2024-06-26 02:10:50', 1),
+(38, '::1', 'admin@gmail.com', 1, '2024-06-26 02:11:50', 1),
+(39, '::1', 'penjual1@gmail.com', 2, '2024-06-26 04:39:33', 1),
+(40, '::1', 'penjual1@gmail.com', 2, '2024-07-02 12:33:17', 1),
+(41, '::1', 'pembeli1@gmail.com', 3, '2024-07-02 12:36:37', 1),
+(42, '::1', 'penjual1@gmail.com', 2, '2024-07-03 02:12:48', 1),
+(43, '::1', 'penjual1@gmail.com', 2, '2024-07-03 02:13:06', 1),
+(44, '::1', 'pembeli1@gmail.com', 3, '2024-07-03 02:13:40', 1),
+(45, '::1', 'pembeli2@gmail.com', 5, '2024-07-03 02:15:59', 1),
+(46, '::1', 'penjual2@gmail.com', 6, '2024-07-03 02:16:39', 1),
+(47, '::1', 'penjual1@gmail.com', 2, '2024-07-03 04:26:16', 1),
+(48, '::1', 'pelanggan1@gmail.com', NULL, '2024-07-03 04:28:27', 0),
+(49, '::1', 'pelanggan1@gmail.com', NULL, '2024-07-03 04:28:36', 0),
+(50, '::1', 'pembeli1@gmail.com', 3, '2024-07-03 04:29:03', 1),
+(51, '::1', 'admin@gmail.com', 1, '2024-07-03 04:40:20', 1),
+(52, '::1', 'pembeli1@gmail.com', 3, '2024-07-03 04:54:30', 1),
+(53, '::1', 'penjual1@gmail.com', 2, '2024-07-07 01:15:11', 1),
+(54, '::1', 'pembeli1@gmail.com', 3, '2024-07-07 01:49:47', 1),
+(55, '::1', 'pembeli2@gmail.com', 5, '2024-07-07 01:51:07', 1),
+(56, '::1', 'penjual2@gmail.com', 6, '2024-07-07 01:51:31', 1),
+(57, '::1', 'penjual1@gmail.com', 2, '2024-07-07 11:37:53', 1),
+(58, '::1', 'penjual2@gmail.com', 6, '2024-07-07 11:39:04', 1),
+(59, '::1', 'pembeli2@gmail.com', 5, '2024-07-07 11:54:33', 1),
+(60, '::1', 'penjual2@gmail.com', 6, '2024-07-08 01:54:54', 1),
+(61, '::1', 'pembeli2@gmail.com', 5, '2024-07-08 01:55:47', 1),
+(62, '::1', 'penjual1@gmail.com', 2, '2024-07-08 02:19:16', 1),
+(63, '::1', 'penjual2@gmail.com', 6, '2024-07-08 02:22:00', 1);
 
 -- --------------------------------------------------------
 
@@ -317,10 +247,13 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `version`, `class`, `group`, `namespace`, `time`, `batch`) VALUES
-(19, '2017-11-20-223112', 'Myth\\Auth\\Database\\Migrations\\CreateAuthTables', 'default', 'Myth\\Auth', 1711763172, 1),
-(20, '2024-03-26-223050', 'App\\Database\\Migrations\\CreateCategoriesTable', 'default', 'App', 1711763172, 1),
-(21, '2024-03-30-014847', 'App\\Database\\Migrations\\CreateServicesTable', 'default', 'App', 1711763553, 2),
-(27, '2024-04-04-041948', 'App\\Database\\Migrations\\CreateOrdersTable', 'default', 'App', 1714084828, 3);
+(39, '2024-03-26-223050', 'App\\Database\\Migrations\\CreateCategoriesTable', 'default', 'App', 1718884633, 1),
+(40, '2017-11-20-223112', 'Myth\\Auth\\Database\\Migrations\\CreateAuthTables', 'default', 'Myth\\Auth', 1718884638, 2),
+(41, '2024-03-30-014847', 'App\\Database\\Migrations\\CreateServicesTable', 'default', 'App', 1718884638, 2),
+(42, '2024-04-04-041948', 'App\\Database\\Migrations\\CreateOrdersTable', 'default', 'App', 1718884638, 2),
+(43, '2024-06-20-104424', 'App\\Database\\Migrations\\CreateCommentsTable', 'default', 'App', 1718884638, 2),
+(44, '2024-06-21-030439', 'App\\Database\\Migrations\\CreateWalletTable', 'default', 'App', 1718939856, 3),
+(45, '2024-06-21-104530', 'App\\Database\\Migrations\\CreateWithdrawalTable', 'default', 'App', 1718967517, 4);
 
 -- --------------------------------------------------------
 
@@ -339,13 +272,39 @@ CREATE TABLE `tbl_categories` (
 --
 
 INSERT INTO `tbl_categories` (`id_categories`, `category_name`, `picture`) VALUES
-(1, 'Website', '1711763933_61890405103b3a2ba79c.jpg'),
-(3, 'Logo Design', '1711794906_7c21e1f44e4c2e5789b8.jpg'),
-(4, 'SEO', '1711933339_940168ec59275defc3c8.jpg'),
-(5, 'Translation', '1711933352_670c9e024ccecb01de28.jpg'),
-(6, 'video Explainer', '1711933622_f45d494c8ff2bad873b6.jpg'),
-(7, 'Data Entry', '1711933638_8889d3e4b3409aa0f2fc.jpg'),
-(8, 'Voice Over', '1711933900_f6c849eebdfcffd9a1a9.jpg');
+(1, 'Website', '1718885238_d3c967b94efc5ed2e0dc.jpg'),
+(2, 'Logo', '1718885284_171faa134e3c65a0fc27.jpg'),
+(3, 'Video', '1718885295_d11749806d7a5d9346a2.jpg'),
+(4, 'SEO', '1718885307_61c2b8b69ddc8815a2cc.jpg'),
+(5, 'Translation', '1718885322_260854c1ed6ec3709046.jpg'),
+(6, 'Voice Over', '1718885356_28bfe923c61b8c51275f.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_comments`
+--
+
+CREATE TABLE `tbl_comments` (
+  `service_id` int(10) UNSIGNED NOT NULL,
+  `order_id` int(11) UNSIGNED NOT NULL,
+  `buyer_id` int(10) UNSIGNED NOT NULL,
+  `rating` int(1) NOT NULL,
+  `comment` text NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `deleted_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_comments`
+--
+
+INSERT INTO `tbl_comments` (`service_id`, `order_id`, `buyer_id`, `rating`, `comment`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 11, 3, 5, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem, quod aut cumque quibusdam inventore molestias quas, neque eveniet', '2024-06-25 11:33:43', '2024-06-25 11:33:43', NULL),
+(1, 12, 5, 4, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem, quod aut cumque quibusdam inventore molestias', '2024-06-25 11:37:16', '2024-06-25 11:37:16', NULL),
+(2, 13, 3, 5, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo unde inventore fugit ipsum voluptatum labore minima laboriosam quidem optio.', '2024-06-25 11:41:44', '2024-06-25 11:41:44', NULL),
+(1, 16, 3, 4, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem, quod aut cumque quibusdam inventore molestias quas, neque eveniet hic', '2024-07-03 04:36:58', '2024-07-03 04:36:58', NULL);
 
 -- --------------------------------------------------------
 
@@ -362,10 +321,10 @@ CREATE TABLE `tbl_orders` (
   `pesan` text DEFAULT NULL,
   `harga` decimal(20,2) DEFAULT NULL,
   `token` text NOT NULL,
-  `status_code` int(3) NOT NULL,
-  `status_order` enum('process','approved','success','rejected','cancelled') DEFAULT 'process',
-  `status_pembayaran` varchar(20) DEFAULT NULL,
-  `payment_type` varchar(8) NOT NULL,
+  `status_order` enum('process','approved','cancelled','rejected','success') NOT NULL DEFAULT 'process',
+  `status_pembayaran` varchar(10) NOT NULL,
+  `payment_type` varchar(10) NOT NULL,
+  `file_name` varchar(255) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL
@@ -375,9 +334,15 @@ CREATE TABLE `tbl_orders` (
 -- Dumping data for table `tbl_orders`
 --
 
-INSERT INTO `tbl_orders` (`order_id`, `id_transaksi`, `buyer_id`, `seller_id`, `service_id`, `pesan`, `harga`, `token`, `status_code`, `status_order`, `status_pembayaran`, `payment_type`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(23, 1011053621, 4, 1, 1, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, ', 1000000.00, '3202b188-e106-43bd-b16b-8c6436decf22', 0, 'success', 'settlement', 'qris', '2024-06-13 11:58:38', '2024-06-13 12:14:23', NULL),
-(24, 1737948295, 4, 3, 3, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s,', 400000.00, '2c02fea0-2952-4763-81da-545a56b2a181', 0, 'approved', 'settlement', 'qris', '2024-06-13 12:23:26', '2024-06-14 02:22:50', NULL);
+INSERT INTO `tbl_orders` (`order_id`, `id_transaksi`, `buyer_id`, `seller_id`, `service_id`, `pesan`, `harga`, `token`, `status_order`, `status_pembayaran`, `payment_type`, `file_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(11, 1908359998, 3, 2, 1, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem, quod aut cumque quibusdam inventore molestias quas, neque eveniet hic nemo nesciunt ad dolorem alias', 1000000.00, 'b8bc1248-75ab-4c2b-8ad2-620339e65a7d', 'success', 'settlement', 'qris', NULL, '2024-06-21 06:11:35', '2024-06-21 06:20:49', NULL),
+(12, 1604233165, 5, 2, 1, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem, quod aut cumque quibusdam inventore molestias quas', 1500000.00, 'f4a1443d-4dbf-4ddb-93b2-54be0312c75a', 'success', 'settlement', 'qris', NULL, '2024-06-21 06:24:20', '2024-06-21 06:25:15', NULL),
+(13, 1276826626, 3, 6, 2, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo unde inventore fugit ipsum voluptatum labore minima laboriosam', 400000.00, '365f4071-b828-46d7-82b6-72ac2fbabb40', 'success', 'settlement', 'qris', NULL, '2024-06-21 06:47:26', '2024-06-25 11:40:35', NULL),
+(14, 1720674258, 3, 2, 1, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem, quod aut cumque quibusdam inventore molestias quas, neque eveniet hic nemo nesciunt ad dolorem alia', 1500000.00, 'fa8341bb-0931-4454-a4b3-91b69f0f256b', 'approved', 'settlement', 'qris', NULL, '2024-07-02 12:37:07', '2024-07-02 12:42:02', NULL),
+(15, 1670888724, 5, 6, 2, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo unde inventore fugit ipsum voluptatum labore minima laboriosam q', 300000.00, '7e1362a3-0392-466d-bf5b-9b76d477a40c', 'success', 'settlement', 'qris', NULL, '2024-07-03 02:16:21', '2024-07-03 02:18:25', NULL),
+(16, 1204007986, 3, 2, 1, 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem, quod aut cumque quibusdam inventore molestias quas,', 1200000.00, '328e6ae7-fe59-4c8a-bc3e-abbdae866b7e', 'success', 'settlement', 'qris', NULL, '2024-07-03 04:31:30', '2024-07-03 04:36:30', NULL),
+(17, 717448754, 3, 2, 1, 'Lorem ', 900000.00, '081711eb-3f03-4df4-a504-a0aa5bc2281d', 'approved', '', '', NULL, '2024-07-03 04:54:49', '2024-07-03 04:55:45', NULL),
+(19, 1468903071, 5, 6, 2, 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 400000.00, '85c56c43-dce4-4b21-b86e-283fafc79598', 'approved', '', '', '1720404381_45265ad41ab77dfbc9a6.zip', '2024-07-07 11:59:47', '2024-07-08 02:06:21', NULL);
 
 -- --------------------------------------------------------
 
@@ -418,8 +383,57 @@ CREATE TABLE `tbl_services` (
 --
 
 INSERT INTO `tbl_services` (`service_id`, `user_id`, `category_id`, `judul`, `deskripsi`, `foto`) VALUES
-(1, 1, 1, 'Jasa Pembuatan Website ', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '1711767176_6dfbb7adea6d879bd862.png'),
-(3, 3, 3, 'Jasa Pembuatan Logo', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has su', '1711852750_19fb28ec89d1d7dcdcd0.jpg');
+(1, 2, 1, 'Jasa Pembuatan Website', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem, quod aut cumque quibusdam inventore molestias quas, neque eveniet hic nemo nesciunt ad dolorem alias, cum temporibus recusandae! Ea, expedita voluptate!', '1718885483_52652099d99e0534f565.png'),
+(2, 6, 2, 'Jasa Pembuatan Logo', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo unde inventore fugit ipsum voluptatum labore minima laboriosam quidem optio. Vel saepe quo possimus eum sit!', '1718952352_b86be9feca14ab77d351.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_wallet`
+--
+
+CREATE TABLE `tbl_wallet` (
+  `id` int(11) NOT NULL,
+  `seller_id` int(10) UNSIGNED NOT NULL,
+  `no_wallet` varchar(15) DEFAULT NULL,
+  `nama_wallet` varchar(10) DEFAULT NULL,
+  `saldo` decimal(20,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_wallet`
+--
+
+INSERT INTO `tbl_wallet` (`id`, `seller_id`, `no_wallet`, `nama_wallet`, `saldo`) VALUES
+(2, 2, '085648597435', 'BRI', 2000000.00),
+(5, 7, '675967584765876', 'bri', NULL),
+(6, 6, '0123456789', 'Dana', 665000.00);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_wd`
+--
+
+CREATE TABLE `tbl_wd` (
+  `id` int(11) NOT NULL,
+  `seller_id` int(10) UNSIGNED NOT NULL,
+  `wallet_id` int(11) NOT NULL,
+  `jml_wd` decimal(20,2) DEFAULT NULL,
+  `status_wd` enum('process','success','failed') NOT NULL DEFAULT 'process',
+  `created_at` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_wd`
+--
+
+INSERT INTO `tbl_wd` (`id`, `seller_id`, `wallet_id`, `jml_wd`, `status_wd`, `created_at`) VALUES
+(1, 2, 2, 375000.00, 'failed', '2024-06-22 01:46:23'),
+(2, 2, 2, 375000.00, 'success', '2024-06-22 02:46:28'),
+(3, 2, 2, 1000000.00, 'success', '2024-07-03 04:40:41'),
+(4, 2, 2, 500000.00, 'failed', '2024-07-03 04:41:52'),
+(6, 2, 2, 140000.00, 'process', '2024-07-07 01:46:13');
 
 -- --------------------------------------------------------
 
@@ -454,12 +468,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `username`, `nama`, `no_tlp`, `alamat`, `foto`, `password_hash`, `reset_hash`, `reset_at`, `reset_expires`, `activate_hash`, `status`, `status_message`, `active`, `force_pass_reset`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'penjual1@gmail.com', 'penjual1', 'Penjual Pertama', '085648597435', 'Tegal, Jawa Tengah', '1717830710_4078647d5905a5838a09.png', '$2y$10$CfwPgmDAPsJWYFZZEegKzO2kCHGK2t/z.i/pbYX0qOHJklwLk.Igu', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-03-30 01:54:46', '2024-06-08 07:11:50', NULL),
-(2, 'admin@admin.com', 'admin', 'Admin Utama', '085648597435', 'Pekalongan, Jawa Tengah', 'default.png', '$2y$10$DwWc8kveYzKoS8P9v6Jv.u0jp8z3rB3dYE285nRqsmfpJf1GCZxq2', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-03-30 01:57:02', '2024-06-08 06:55:49', NULL),
-(3, 'penjual2@gmail.com', 'penjual2', NULL, NULL, NULL, 'default.png', '$2y$10$vtSSgahUDX/IDdtP.RV1YulwA2S7Ev7IFir6PZo6hK7GqVi.XXUmC', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-03-30 02:54:35', '2024-06-12 02:14:49', NULL),
-(4, 'pembeli1@gmail.com', 'pembeli1', 'asfasfa', '0123456789', 'Pekalongan', 'default.png', '$2y$10$ROT9oDDNRl1bYv0S2ArvYujRuWudBqcnaSCveprODj34KyCMQfxEO', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-03-30 10:49:39', '2024-06-08 07:15:47', NULL),
-(5, 'pembeli2@gmail.com', 'pembeli2', 'Pembli Kedua', '0123456789', 'Pekalongan', '1717560420_0dd7c490725835709c1d.png', '$2y$10$5je6sbKPAQOe0n.a1N.QKecyizbGNavcKnLz5DrI.uvo8oFmAoo2O', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-06-05 03:40:15', '2024-06-08 05:09:25', NULL),
-(8, 'pembeli3@gmail.com', 'pembeli3', 'Pembeli Ketiga', '0123456789', 'Batang, Jawa Tengah', '1717743628_aff40dc74a9f1ee5dd85.png', '$2y$10$4kkFvEfo7NRY59e6Aw6naeanTGaRWeWQR7jmqpLMSvtfd4ba.kWFe', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-06-07 06:37:54', '2024-06-12 02:14:55', NULL);
+(1, 'admin@gmail.com', 'admin', NULL, NULL, NULL, 'default.png', '$2y$10$KoO/0atDp883atQW0OxXFO5L1t9pGoilsmwjf8w6wSjo4LEnpxese', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-06-20 11:58:30', '2024-06-20 11:58:30', NULL),
+(2, 'penjual1@gmail.com', 'penjual1', 'Penjual Pertama', '0123456789', 'Pekalongan, Jawa Tengah', 'default.png', '$2y$10$y5XrK07aX89VbEcXiDskhObFsH3izuhGIxm5uVSEEXb.6p8FSC.lK', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-06-20 12:01:41', '2024-06-20 12:26:27', NULL),
+(3, 'pembeli1@gmail.com', 'pembeli1', 'Pembeli Pertama', '0123456789', 'Pekalongan, Jawa Tengah', 'default.png', '$2y$10$5k8AcwvIH1nqnO4MNvepieFvwBxX9W9yhKKrVxrUNas7Gb/aqb.JW', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-06-20 12:02:48', '2024-07-03 04:31:18', NULL),
+(5, 'pembeli2@gmail.com', 'pembeli2', 'Pembeli Kedua', '0123456789', 'Batang, Jawa Tengah', 'default.png', '$2y$10$SGRc6Obc0kIZXXwPWknZeO.tC1sIXTveDcPHux3rAYJOB4AkeRUUO', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-06-21 04:14:30', '2024-06-21 04:14:53', NULL),
+(6, 'penjual2@gmail.com', 'penjual2', 'Penjual Kedua', '0987654321', 'Pemalang, Jawa Tengah', 'default.png', '$2y$10$CRBC27dH7/21zYJIfMugA.G8nz9OEAkMVGbW5qnnOkz9CiDlehIym', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-06-21 06:44:25', '2024-06-21 06:53:44', NULL),
+(7, 'penjual3@gmail.com', 'penjual3', NULL, NULL, NULL, 'default.png', '$2y$10$WAujmP3TZ7DSilu0CKt4j.ZARIcn0vAC0DXWuWa0AwNlwbY7vYso2', NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, '2024-06-21 09:35:36', '2024-06-21 09:35:36', NULL);
 
 --
 -- Indexes for dumped tables
@@ -539,6 +553,14 @@ ALTER TABLE `tbl_categories`
   ADD PRIMARY KEY (`id_categories`);
 
 --
+-- Indexes for table `tbl_comments`
+--
+ALTER TABLE `tbl_comments`
+  ADD KEY `tbl_comments_service_id_foreign` (`service_id`),
+  ADD KEY `tbl_comments_buyer_id_foreign` (`buyer_id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
 -- Indexes for table `tbl_orders`
 --
 ALTER TABLE `tbl_orders`
@@ -561,6 +583,21 @@ ALTER TABLE `tbl_services`
   ADD PRIMARY KEY (`service_id`),
   ADD KEY `tbl_services_user_id_foreign` (`user_id`),
   ADD KEY `tbl_services_category_id_foreign` (`category_id`);
+
+--
+-- Indexes for table `tbl_wallet`
+--
+ALTER TABLE `tbl_wallet`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tbl_wallet_seller_id_foreign` (`seller_id`);
+
+--
+-- Indexes for table `tbl_wd`
+--
+ALTER TABLE `tbl_wd`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `tbl_wd_seller_id_foreign` (`seller_id`),
+  ADD KEY `tbl_wd_wallet_id_foreign` (`wallet_id`);
 
 --
 -- Indexes for table `users`
@@ -590,7 +627,7 @@ ALTER TABLE `auth_groups`
 -- AUTO_INCREMENT for table `auth_logins`
 --
 ALTER TABLE `auth_logins`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `auth_permissions`
@@ -614,19 +651,19 @@ ALTER TABLE `auth_tokens`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `tbl_categories`
 --
 ALTER TABLE `tbl_categories`
-  MODIFY `id_categories` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_categories` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_orders`
 --
 ALTER TABLE `tbl_orders`
-  MODIFY `order_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `order_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_sellers`
@@ -638,13 +675,25 @@ ALTER TABLE `tbl_sellers`
 -- AUTO_INCREMENT for table `tbl_services`
 --
 ALTER TABLE `tbl_services`
-  MODIFY `service_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `service_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tbl_wallet`
+--
+ALTER TABLE `tbl_wallet`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `tbl_wd`
+--
+ALTER TABLE `tbl_wd`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -678,6 +727,14 @@ ALTER TABLE `auth_users_permissions`
   ADD CONSTRAINT `auth_users_permissions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `tbl_comments`
+--
+ALTER TABLE `tbl_comments`
+  ADD CONSTRAINT `tbl_comments_buyer_id_foreign` FOREIGN KEY (`buyer_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_comments_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `tbl_orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_comments_service_id_foreign` FOREIGN KEY (`service_id`) REFERENCES `tbl_services` (`service_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `tbl_orders`
 --
 ALTER TABLE `tbl_orders`
@@ -697,6 +754,19 @@ ALTER TABLE `tbl_sellers`
 ALTER TABLE `tbl_services`
   ADD CONSTRAINT `tbl_services_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `tbl_categories` (`id_categories`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tbl_services_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_wallet`
+--
+ALTER TABLE `tbl_wallet`
+  ADD CONSTRAINT `tbl_wallet_seller_id_foreign` FOREIGN KEY (`seller_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tbl_wd`
+--
+ALTER TABLE `tbl_wd`
+  ADD CONSTRAINT `tbl_wd_seller_id_foreign` FOREIGN KEY (`seller_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tbl_wd_wallet_id_foreign` FOREIGN KEY (`wallet_id`) REFERENCES `tbl_wallet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
